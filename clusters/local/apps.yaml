@@ -14,12 +14,12 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/staging
+  path: ./apps/local
   prune: true
   postBuild:
     substitute:
       gitops_branch: local
-      env: testing
+      env: testing # May be broader scope
       # aws_acc_id: "TODO"
       # aws_region: eu-central-1
   wait: true
