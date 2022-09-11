@@ -9,6 +9,7 @@ resources:
   - crossplane.yaml
   - flagger.yaml
   - tf-hello.yaml
+  - podinfo.yaml
     # - acme-oci.yaml
     # - acme-github.yaml
     # - secret-aws.yaml
