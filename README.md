@@ -43,3 +43,4 @@ Alternatively, you can bootstrap an existing cluster (be sure to have current ku
 - bb scripting?
 - tfctl app?
 - basic sops/lastpass/github key managment?
+- knative?
