@@ -1,0 +1,25 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: infrastructure
+  namespace: flux-system
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  interval: 10m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/local
+  prune: true
+  postBuild:
+    substitute:
+      gitops_branch: local
+      env: testing
+      aws_ecr_acc_id: "851715686820"
+      aws_acc_id: "597031446072"
+      aws_region: eu-central-1
+  #    aws_account_id: ...
+  #    cluster_name: haute-cuisine-eks-testing

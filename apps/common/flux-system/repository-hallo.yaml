@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: service-invoice
+spec:
+  secretRef:
+    name: "regcred"
+  image: 597031446072.dkr.ecr.eu-central-1.amazonaws.com/service-invoice
+  interval: 1m0s
+

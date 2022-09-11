@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - bitnami.yaml
+  - traefik.yaml
+  - secrets-store-csi-driver.yaml
+  - tf-controller.yaml
+  - crossplane.yaml
+  - flagger.yaml
+  - tf-hello.yaml
+    # - acme-oci.yaml
+    # - acme-github.yaml
+    # - secret-aws.yaml
+    # - secret-github.yaml
