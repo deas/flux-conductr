@@ -1,32 +1,32 @@
-# Flux based GitOps - Incubator
+# Flux Conductr - GitOps Everything 🧪
 
-Flux based [GitOps](https://gitops.tech) for Haute Cuisine - mostly based on [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) so the docs over there should still be pretty accurate.
+Flux based [GitOps](https://gitops.tech) - orchestrate all the flux things - mostly based on [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example). The docs over there should still be pretty accurate.
+
+Generate encryption keys for ssh/gpg:
+
+```shell
+./script/gen-keys.sh
+```
+Add public deployment key to github. You may also want to disable github actions to start.
+```
+gh repo deploy-key add ...
+```
 
 
 ## Bootrapping
 
-There is a `terraform` + `kind` based bootstrap [example over at `deas/terraform-modules`](https://github.com/deas/terraform-modules/tree/main/flux/examples/kind) in case you want to try it locally or in CI. Rename `sample.tfvars` to `terraform.tfvars` and make sure to adjust values.
+There is a `terraform` + `kind` based bootstrap in [`tf`](./tf):
 
+```shell
+cp sample.tfvars terraform.tfvars
+# Set proper values in terraform.tfvars
+terraform apply
+```
 Alternatively, you can bootstrap an existing cluster (be sure to have current kube context set properly):
 
 ```sh
-export GITHUB_TOKEN=...
-GITHUB_USER=deas
-GITHUB_REPO=flux-incubatr
-BRANCH=local
-CLUSTER_PATH=clusters/local
-
-flux bootstrap github \
-  --owner=${GITHUB_USER} \
-  --log-level debug \
-  --repository=${GITHUB_REPO} \
-  --branch=${BRANCH} \
-  --personal \
-  --read-write-key \
-  --components-extra=image-reflector-controller,image-automation-controller \
-  --path=${CLUSTER_PATH}
+./scripts/flux-bootstrap.sh
 ```
-
 
 ## TODO
 - Naming?
@@ -39,3 +39,7 @@ flux bootstrap github \
 - Validation ( -> Monitoring)
 - local k3s (Speed?)
 - Borrow from Tanzu?
+- Manage github with terraform/crossplane
+- bb scripting?
+- tfctl app?
+- basic sops/lastpass/github key managment?
