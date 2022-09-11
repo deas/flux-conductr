@@ -1,12 +1,12 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: service-invoice
+  name: hallo
 spec:
   filterTags:
     pattern: "^[0-9.]+$"
   imageRepositoryRef:
-    name: service-invoice
+    name: hallo
   policy:
     numerical:
       order: "asc"

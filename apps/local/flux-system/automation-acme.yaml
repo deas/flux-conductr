@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
-  name: hc
+  name: acme
 spec:
   git:
     checkout:
@@ -9,7 +9,7 @@ spec:
         branch: ${gitops_branch:=none}
     commit:
       author:
-        email: fluxcdbot@foodist.de
+        email: fluxcdbot@contenreich.de
         name: fluxcdbot
       messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
     push:
@@ -19,6 +19,6 @@ spec:
     kind: GitRepository
     name: apps-automation
   update:
-    path: ./apps/staging # ${env:=none} # TODO Hack!
+    path: ./apps/local # ${env:=none} # TODO Hack!
     strategy: Setters
 

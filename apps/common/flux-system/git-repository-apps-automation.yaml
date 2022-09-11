@@ -10,4 +10,4 @@ spec:
     branch: ${gitops_branch:=none}
   secretRef:
     name: apps-automation
-  url: ssh://git@github.com/deas/hc-k8s-deployment
+  url: ssh://git@github.com/deas/flux-conductr

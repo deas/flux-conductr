@@ -90,7 +90,7 @@ spec:
                 - name: DOCKER_SECRET_NAME
                   value: regcred # ecr-credentials
                 - name: ECR_REGISTRY
-                  value: 597031446072.dkr.ecr.eu-central-1.amazonaws.com # fill in the account id and region
+                  value: TODO.dkr.ecr.eu-central-1.amazonaws.com # fill in the account id and region
               volumeMounts:
                 - mountPath: /token
                   name: token
@@ -111,7 +111,7 @@ spec:
                 - name: HELM_SECRET_NAME
                   value: ecr-helm # ecr-credentials
                 - name: ECR_REGISTRY
-                  value: 597031446072.dkr.ecr.eu-central-1.amazonaws.com # TODO: fill in the account id and region
+                  value: TODO.dkr.ecr.eu-central-1.amazonaws.com # TODO: fill in the account id and region
               volumeMounts:
                 - mountPath: /token
                   name: token
@@ -170,7 +170,7 @@ spec:
             - name: DOCKER_SECRET_NAME
               value: regcred # ecr-credentials
             - name: ECR_REGISTRY
-              value: 597031446072.dkr.ecr.eu-central-1.amazonaws.com # TODO: fill in the account id and region
+              value: TODO.dkr.ecr.eu-central-1.amazonaws.com # TODO: fill in the account id and region
           volumeMounts:
             - mountPath: /token
               name: token
@@ -191,7 +191,7 @@ spec:
             - name: HELM_SECRET_NAME
               value: ecr-helm # ecr-credentials
             - name: ECR_REGISTRY
-              value: 597031446072.dkr.ecr.eu-central-1.amazonaws.com # TODO: fill in the account id and region
+              value: TODO.dkr.ecr.eu-central-1.amazonaws.com # TODO: fill in the account id and region
           volumeMounts:
             - mountPath: /token
               name: token

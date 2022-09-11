@@ -20,8 +20,7 @@ spec:
     substitute:
       gitops_branch: local
       env: testing
-      aws_ecr_acc_id: "851715686820"
-      aws_acc_id: "597031446072"
+      aws_acc_id: "TODO"
       aws_region: eu-central-1
   wait: true
   timeout: 5m0s
