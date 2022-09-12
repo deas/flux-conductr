@@ -1,0 +1,28 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: github
+  namespace: apps
+spec:
+  type: githubdispatch
+  address: https://github.com/org/repo
+  secretRef:
+    name: github-token
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: demo-dispatch
+  namespace: apps
+spec:
+  providerRef:
+    name: github
+  summary: "env=local"
+  eventSeverity: info
+  eventSources:
+    - kind: HelmRelease
+      name: demo
+  exclusionList:
+    - ".*upgrade.*has.*started"
+    - ".*is.*not.*ready"
+    - "^Dependencies.*"
