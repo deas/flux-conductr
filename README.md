@@ -33,9 +33,8 @@ Alternatively, you can bootstrap an existing cluster (be sure to have current ku
 - Deduplicate/Dry things
 - Setup "envs" properly / remove literals
 - Flux Dashboard?
-- Grafana/Prometheus?
+- [Grafana/Prometheus](https://fluxcd.io/flux/guides/monitoring/)?
 - Flagger? Rolling, Blue/Green, Canary?
-- Prometheus?
 - Validation ( -> Monitoring)
 - local k3s (Speed?)
 - Borrow from Tanzu?

@@ -10,6 +10,7 @@ resources:
   - flagger.yaml
   - tf-hello.yaml
   - podinfo.yaml
+  - flux-monitoring.yaml
     # - acme-oci.yaml
     # - acme-github.yaml
     # - secret-aws.yaml
