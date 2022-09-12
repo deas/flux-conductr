@@ -22,6 +22,12 @@ spec:
   # Default values
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
+    image:
+      repository: ghcr.io/stefanprodan/podinfo # {"$imagepolicy": "flux-system:hallo:name"}
+      pullPolicy: IfNotPresent
+      tag: "6.1.8" # {"$imagepolicy": "flux-system:hallo:tag"}
+      # bump to 6.2.0?
+    # pullSecret: "regcred"
     #cache: tcp://redis-master.redis:6379
     #ingress:
     #  enabled: true
