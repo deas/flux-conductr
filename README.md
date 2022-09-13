@@ -43,5 +43,6 @@ Alternatively, you can bootstrap an existing cluster (be sure to have current ku
 - tfctl app?
 - basic sops/lastpass/github key managment?
 - knative?
+- contour appear to play with knative, kind and flux! (use from bitnami)
 - provide tool to wipe (shipping) encrypted secrets
 - default to auto update everything?
