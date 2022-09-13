@@ -4,8 +4,8 @@ namespace: flux-system
 resources:
 #- ../secret-aws-env.yaml
 - terraform-hello.yaml
-#- provider-slack-ops-test.yaml
-#- secret-slack-ops-test.yaml
+- provider-slack-ops-test.yaml
+- secret-slack-ops-test.yaml
 - automation-acme.yaml
-#- alert-ocd.yaml
+- alert-ocd.yaml
 

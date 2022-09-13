@@ -4,7 +4,7 @@ metadata:
   name: slack-ops
 spec:
   type: slack
-  channel: Ops-Test
+  channel: local-ops
   # webhook address (ignored if secretRef is specified)
   # address: https://...
   # proxy: https://proxy.corp:8080
