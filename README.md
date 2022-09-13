@@ -43,4 +43,5 @@ Alternatively, you can bootstrap an existing cluster (be sure to have current ku
 - tfctl app?
 - basic sops/lastpass/github key managment?
 - knative?
+- provide tool to wipe (shipping) encrypted secrets
 - default to auto update everything?

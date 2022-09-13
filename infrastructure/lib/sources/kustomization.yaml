@@ -14,4 +14,4 @@ resources:
     # - acme-oci.yaml
     # - acme-github.yaml
     # - secret-aws.yaml
-    # - secret-github.yaml
+  - secret-github.yaml
