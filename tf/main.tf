@@ -86,12 +86,10 @@ resource "kind_cluster" "default" {
 module "flux" {
   source = "github.com/deas/terraform-modules//flux"
   # version
-  github_owner    = var.flux_github_owner
-  repository_name = var.flux_repository_name
-  target_path     = var.target_path
-  branch          = var.flux_branch
-  flux_install    = file("${var.filename_flux_path}/gotk-components.yaml")
-  flux_sync       = file("${var.filename_flux_path}/gotk-sync.yaml")
+  target_path = var.target_path
+  # branch          = var.flux_branch
+  flux_install = file("${var.filename_flux_path}/gotk-components.yaml")
+  flux_sync    = file("${var.filename_flux_path}/gotk-sync.yaml")
   tls_key = {
     private = file(var.id_rsa_fluxbot_ro_path)
     public  = file(var.id_rsa_fluxbot_ro_pub_path)
