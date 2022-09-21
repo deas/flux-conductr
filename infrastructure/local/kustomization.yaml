@@ -4,6 +4,6 @@ resources:
   - ../common
   # - ../lib/flagger HelmRelease/traefikee/flagger namespace not specified, error: namespaces "traefikee" not found
   - flux-system
-  # - metallb-system
+  - metallb-system
   #patchesStrategicMerge:
   #  - acme-credentials.yaml  
