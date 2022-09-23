@@ -5,6 +5,7 @@ resources:
   - bitnami.yaml
   - traefik.yaml
   - secrets-store-csi-driver.yaml
+  - external-secrets.yaml
   - tf-controller.yaml
   - crossplane.yaml
   - flagger.yaml
