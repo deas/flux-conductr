@@ -19,7 +19,7 @@ spec:
   #      dynamodb_endpoint           = "http://localhost:4566"
   #      encrypt                     = true
   #    }
-  path: ./modules/datadog/minimal
+  path: ./modules/datadog
   interval: 1m
   #runnerPodTemplate:
   #  spec:
