@@ -5,7 +5,20 @@ metadata:
 #  namespace: flux-system
 spec:
   path: ./
+  # Only drift detection - no plan+apply
+  # approvePlan: disable
+  # Auto w/o drift detection
+  approvePlan: auto
+  # disableDriftDetection: true
+
   interval: 1m
+  #runnerPodTemplate:
+  #  spec:
+  #    envFrom:
+  #      - secretRef:
+  #          name: hello
+  #    # image: registry.io/tf-runner:xyz
+
   sourceRef:
     kind: GitRepository
     name: tf-hello
