@@ -6,5 +6,6 @@ resources:
 #  - ../lib/traefik
 #  - ../lib/csi-secrets-store
   - ../lib/tf-controller
+  - ../lib/ww-gitops
 # - ../lib/crossplane
 # - ../lib/redis

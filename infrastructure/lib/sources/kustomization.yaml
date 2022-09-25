@@ -8,6 +8,7 @@ resources:
   - external-secrets.yaml
   - tf-controller.yaml
   - crossplane.yaml
+  - ww-gitops.yaml
   - flagger.yaml
   - tf-hello.yaml
   - gitops-demos.yaml
