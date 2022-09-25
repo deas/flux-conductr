@@ -7,5 +7,6 @@ resources:
 #  - ../lib/csi-secrets-store
   - ../lib/tf-controller
   - ../lib/ww-gitops
+  - ../lib/external-secrets
 # - ../lib/crossplane
 # - ../lib/redis
