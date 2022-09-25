@@ -5,6 +5,7 @@ resources:
 #- ../secret-aws-env.yaml
 - terraform-hello.yaml
 - secret-terraform-hello-env.yaml
+- external-secret-datadog-env.yaml
 - provider-slack-ops-test.yaml
 - secret-slack-ops-test.yaml
 - automation-acme.yaml
