@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - release.yaml
   - secret-awssm.yaml
+  - secretstore-aws.yaml
