@@ -13,11 +13,11 @@ spec:
   # disableDriftDetection: true
 
   interval: 1m
-  #runnerPodTemplate:
-  #  spec:
-  #    envFrom:
-  #      - secretRef:
-  #          name: hello
+  runnerPodTemplate:
+    spec:
+      envFrom:
+        - secretRef:
+            name: terraform-hello-env
   #    # image: registry.io/tf-runner:xyz
 
   sourceRef:
