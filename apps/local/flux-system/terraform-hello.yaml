@@ -9,6 +9,7 @@ spec:
   # approvePlan: disable
   # Auto w/o drift detection
   approvePlan: auto
+  alwaysCleanupRunnerPod: false
   # disableDriftDetection: true
 
   interval: 1m
