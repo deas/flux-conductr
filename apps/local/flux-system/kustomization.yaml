@@ -9,5 +9,6 @@ resources:
 - provider-slack-ops-test.yaml
 - secret-slack-ops-test.yaml
 - automation-acme.yaml
-#- alert-ocd.yaml
+- alert-ocd.yaml
+- alert-terraform.yaml
 
