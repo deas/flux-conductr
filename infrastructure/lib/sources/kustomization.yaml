@@ -10,7 +10,6 @@ resources:
   - crossplane.yaml
   - ww-gitops.yaml
   - flagger.yaml
-  - tf-hello.yaml
   - gitops-demos.yaml
   - podinfo.yaml
   - flux-monitoring.yaml
