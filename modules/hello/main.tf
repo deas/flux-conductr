@@ -2,12 +2,11 @@ terraform {
   required_version = ">= 0.12.26"
 }
 
-variable "subject" {
+variable "env" {
   type        = string
-  default     = "World"
-  description = "Subject to hello"
+  default     = "none"
 }
 
-output "hello_world" {
-  value = "Hello, ${var.subject}!"
+output "hello_env" {
+  value = "Hello, ${var.env}!"
 }
