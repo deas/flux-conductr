@@ -6,11 +6,16 @@ spec:
   providerRef:
     name: slack-ops
   eventSeverity: info
+  # summary: 
+  #exclusionList:
+  #  - ""
   eventSources:
     # - image.toolkit.fluxcd.io/v1beta1 ImagePolicy
-    # - image.toolkit.fluxcd.io/v1beta1 ImageRepository,
+    # - image.toolkit.fluxcd.io/v1beta1 ImageRepository
     - kind: ImageUpdateAutomation # image.toolkit.fluxcd.io/v1beta1
       name: '*'
+      # matchLabels
+      # namespace
     - kind: HelmRelease # helm.toolkit.fluxcd.io/v2beta1
       name: '*'
     # - helm.toolkit.fluxcd.io/v2beta1 HelmRelease
