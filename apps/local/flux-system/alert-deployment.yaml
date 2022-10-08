@@ -1,7 +1,7 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Alert
 metadata:
-  name: on-call-webapp
+  name: deployment
 spec:
   providerRef:
     name: slack-ops
@@ -11,6 +11,6 @@ spec:
       name: '*'
     - kind: Kustomization
       name: '*'
-#    - apiVersion: infra.contrib.fluxcd.io/v1alpha1
-#      kind: Terraform
-#      name: '*'
+    - apiVersion: infra.contrib.fluxcd.io/v1alpha1
+      kind: Terraform
+      name: '*'
