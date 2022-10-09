@@ -4,4 +4,4 @@ resources:
   - ../common
   - acme
   - flux-system
-#  - clustersecretstore-aws.yaml
+  - clustersecretstore-aws.yaml
