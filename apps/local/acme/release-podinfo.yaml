@@ -25,7 +25,7 @@ spec:
     image:
       repository: ghcr.io/stefanprodan/podinfo # {"$imagepolicy": "flux-system:hallo:name"}
       pullPolicy: IfNotPresent
-      tag: "6.0.4" # {"$imagepolicy": "flux-system:hallo:tag"}
+      tag: "6.0.3" # {"$imagepolicy": "flux-system:hallo:tag"}
       # bump to 6.2.0?
     # pullSecret: "regcred"
     #cache: tcp://redis-master.redis:6379
