@@ -2,8 +2,8 @@
 terraform {
   required_providers {
     kind = {
-      source  = "kyma-incubator/kind"
-      version = "0.0.11" # ~> 1.0"
+      source  = "tehcyx/kind"
+      version = "0.0.14"
     }
     /*
     github = {
