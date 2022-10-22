@@ -8,3 +8,8 @@
 !/apps/
 !/clusters/
 !/infrastructure/
+!/chart-hacks/
+
+# Include terraform directories
+!/modules/
+/modules/**/backend.tf

@@ -1,97 +1,35 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: common
+  name: podinfo
+  namespace: podinfo
 spec:
-  releaseName: common
+  releaseName: podinfo
   chart:
     spec:
-      chart: common
-      version: ">=0.7.2 <1.0.0"
+      chart: podinfo
       sourceRef:
-        kind: HelmRepository # Bucket
-        name: hc-github # hc
+        kind: HelmRepository
+        name: podinfo
         namespace: flux-system
-  dependsOn:
-    - name: traefikee
-      namespace: traefikee
+  #dependsOn:
+  #  - name: other-thing
+  #    namespace: other-ns
   interval: 5m
   install:
     remediation:
       retries: 3
-  #valuesFrom:
+  # Default values
+  # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
-    corsHeaders:
-      accessControlAllowOriginList:
-        - '*'
-    jwt:
-      privateKey: |
-        -----BEGIN ENCRYPTED PRIVATE KEY-----
-        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
-        beJcXxTt2dqH48DgnQ==
-        -----END ENCRYPTED PRIVATE KEY-----
-      publicKey: |
-        -----BEGIN PUBLIC KEY-----
-        MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAoW+xQQg5diofy267A/QI
-        wX9VcZvrszZceyPv3v2wIFO6Vza34gvHQ9FyK+Aa2JPmRaGe0yYiQEQwjnbRW4hO
-        wYcQP00mYROAUU5+TOvXsxzciJAC0oK+dpy2i1Map1cYgoT5dZ/gIMpqFkNt8AyW
-        jhIeMTCj6TJSOqSSDPfl180LZv7Gkz3pmzQ8ur0T6cNtq6yB1wD3CukGmkKLU5ef
-        NZaGJHOItmnIKCj2RCN/bufCg1kBTkunKOMQ2DMR8mnT0msHQsSVHFWRnEV0W6GW
-        hUa5FbVVdGkda8TC90/sojpy7+GsqwetuWMeKpEqUKXlL4hlwxGFBJ0nuCWiZoRo
-        AH4I1FwXC+WF1PM6ynE0rNvR/pIcdRJlL4iAn63FDnjVH+5SAT1uZmow/2XM+PN2
-        bYhfSTB0Zp2fK3L/z8h6nyHWgd1ADrZWHv02C1Xz9+DaX9xhJXlv0i3r4j1BNpXw
-        nGeo1jWxTmX/F84CoZ11duxe6lWEBarcNpz2+Guj8vP/ZdheIGDqD4zI0jgjDo39
-        8LLYQBlatAK81x0A1OMlAAgZgCOHyjG1JHPHZ3ZTei1qFqkEV4KRFxp4fHRCFR5n
-        VdndfiSpXOYryjNXatEQLbAbhLOnxnKvnBX+3uZvGtVkMd8S5yExWN3le2z8/crZ
-        PvujHU8efPkevpZP7OJv55cCAwEAAQ==
-        -----END PUBLIC KEY-----
-    stage: testing
+    image:
+      repository: ghcr.io/stefanprodan/podinfo # {"$imagepolicy": "flux-system:hallo:name"}
+      pullPolicy: IfNotPresent
+      tag: "6.0.4" # {"$imagepolicy": "flux-system:hallo:tag"}
+      # bump to 6.2.0?
+    # pullSecret: "regcred"
+    #cache: tcp://redis-master.redis:6379
+    #ingress:
+    #  enabled: true
+    #  annotations:
+    #    kubernetes.io/ingress.class: nginx

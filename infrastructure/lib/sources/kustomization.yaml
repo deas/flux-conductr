@@ -5,11 +5,15 @@ resources:
   - bitnami.yaml
   - traefik.yaml
   - secrets-store-csi-driver.yaml
+  - external-secrets.yaml
   - tf-controller.yaml
   - crossplane.yaml
+  - ww-gitops.yaml
   - flagger.yaml
-  - tf-hello.yaml
+  - gitops-demos.yaml
+  - podinfo.yaml
+  - flux-monitoring.yaml
     # - acme-oci.yaml
     # - acme-github.yaml
     # - secret-aws.yaml
-    # - secret-github.yaml
+  - secret-github.yaml
