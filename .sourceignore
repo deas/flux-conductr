@@ -8,6 +8,7 @@
 !/apps/
 !/clusters/
 !/infrastructure/
+!/chart-hacks/
 
 # Include terraform directories
 !/modules/

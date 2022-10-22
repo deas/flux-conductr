@@ -18,7 +18,7 @@ spec:
   prune: true
   postBuild:
     substitute:
-      gitops_branch: local
+      gitops_branch: main
       env: testing # May be broader scope
       # aws_acc_id: "TODO"
       # aws_region: eu-central-1
