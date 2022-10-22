@@ -1,7 +1,9 @@
 #!/bin/sh
 # TODO: Pull stuff from tf
 
-. ./flux-env.sh
+set -xe
+
+. $(dirname $0)/flux-env.sh
 
 flux bootstrap github \
   --owner=${GITHUB_USER} \

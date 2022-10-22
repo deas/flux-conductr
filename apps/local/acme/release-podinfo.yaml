@@ -5,6 +5,14 @@ metadata:
   namespace: podinfo
 spec:
   releaseName: podinfo
+  # Demo of very hacky helm repo bailout
+  #chart:
+  #  spec:
+  #    chart: ./chart-hacks/podinfo
+  #    sourceRef:
+  #      kind: GitRepository
+  #      name: flux-system
+  #      namespace: flux-system
   chart:
     spec:
       chart: podinfo

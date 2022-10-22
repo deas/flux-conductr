@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - bitnami.yaml
+  - cilium.yaml
   - traefik.yaml
   - secrets-store-csi-driver.yaml
   - external-secrets.yaml
