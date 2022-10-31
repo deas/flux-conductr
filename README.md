@@ -32,7 +32,7 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 ./scripts/flux-bootstrap.sh
 ```
 
-## Known issues
+## Known Issues
 - knative challenging (Some bits need `kustomize.toolkit.fluxcd.io/substitute: disabled` in our context, other things need tweaks to upstream yaml to play with GitOps "... configured")
 
 ## TODO
@@ -53,4 +53,8 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - contour appear to play with knative, kind and flux! (use from bitnami)
 - provide tool to wipe (shipping) encrypted secrets
 - default to auto update everything?
+
+## Misc/Random Bits
 - ~~[Kind cluster with Cilium and no kube-proxy](https://medium.com/@charled.breteche/kind-cluster-with-cilium-and-no-kube-proxy-c6f4d84b5a9d)~~
+- [Cilium Grafana Observability Demo](https://github.com/isovalent/cilium-grafana-observability-demo)
+- [Install Knative using quickstart](https://knative.dev/docs/getting-started/quickstart-install/)
