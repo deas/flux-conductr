@@ -115,9 +115,9 @@ resource "helm_release" "cilium" {
 }
 
 module "flux" {
-  source = "github.com/deas/terraform-modules//flux"
+  source = "github.com/deas/terraform-modules//flux?ref=ed96cf5bb1a6c08f891688f695865ac31e1f66ea"
   # version
-  target_path = var.target_path
+  # target_path = var.target_path
   # branch          = var.flux_branch
   flux_install = file("${var.filename_flux_path}/gotk-components.yaml")
   flux_sync    = file("${var.filename_flux_path}/gotk-sync.yaml")

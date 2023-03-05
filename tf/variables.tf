@@ -9,11 +9,6 @@ variable "kind_cluster_name" {
   default     = "flux-conductr"
 }
 
-variable "target_path" {
-  type        = string
-  description = "flux sync target path"
-}
-
 /*
 variable "github_init" {
   type        = bool
