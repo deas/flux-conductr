@@ -18,11 +18,13 @@ variable "github_init" {
 */
 
 variable "id_rsa_fluxbot_ro_path" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "id_rsa_fluxbot_ro_pub_path" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "additional_keys" {
@@ -30,10 +32,11 @@ variable "additional_keys" {
   default = {}
 }
 
-variable "filename_flux_path" {
+variable "flux_kustomization_path" {
   type    = string
-  default = "../simple/clusters/local/flux-system"
+  default = "../clusters/local/flux-system"
 }
+
 
 /*
 variable "gcp_secrets_credentials" {
@@ -47,8 +50,8 @@ variable "gcp_secrets_project_id" {
 variable "flux_secrets" {
   type = set(string)
 }
-*/
 
 variable "cluster" {
   type = string
 }
+*/

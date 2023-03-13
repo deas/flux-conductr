@@ -22,6 +22,12 @@ DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 1.3
 DOCKER_IMAGE_DEVELOPER_TOOLS := cft/developer-tools
 REGISTRY_URL := gcr.io/cloud-foundation-cicd
 
+DEFAULT_GOAL := help
+
+.PHONY: help
+help:  ## Display this help
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
 # Enter docker container for local development
 .PHONY: docker_run
 docker_run:
@@ -65,5 +71,13 @@ docker_generate_docs:
 .PHONY: generate_docs
 generate_docs: docker_generate_docs
 
-apply:
+.PHONY: apply
+apply: ## Terraform apply
 	terraform apply -auto-approve
+
+.PHONY: quick-destroy
+quick-destroy: ## Quick destruction
+	docker stop flux-conductr-control-plane
+	docker rm flux-conductr-control-plane
+	rm -rf 	terraform.tfstate*
+

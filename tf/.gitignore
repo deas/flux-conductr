@@ -43,3 +43,4 @@ terraform.tfvars
 fn.zip
 .envrc
 scratch
+flux-conductr-config

@@ -1,5 +1,7 @@
 # Providers
 terraform {
+  required_version = ">= 1.2"
+
   #backend "s3" {
   #  bucket = "tqgg-terraform-state"
   #  #key            = "states/staging/datadog"
@@ -9,7 +11,8 @@ terraform {
   #}
   required_providers {
     datadog = {
-      source = "DataDog/datadog"
+      source  = "DataDog/datadog"
+      version = ">= 3.20.0"
     }
   }
 }

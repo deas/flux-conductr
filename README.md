@@ -1,12 +1,38 @@
 # Flux Conductr - GitOps Everything 🧪
 
-The primary goal of this project is to excersize and experiment with [GitOps](https://gitops.tech) orchestration of components with Flux. As such, I consider localhost experience (hence `kind` and maybe `k3s` soon) very important. Given that, some elements may be useful in CI context. Most things however, should play nice on bigger or even produtive environments as well.
+The primary goal of this project is to exercise and experiment with [flux](https://fluxcd.io/) based [GitOps](https://gitops.tech) deployment covering the cycle - up to production via promotion, if you want to. Experimentation and production do not have to conflict.
 
-A secondary goal is offering a general playground for experimentation - still broadly scoped to Flux. At the moment, this targets Terraform, Crossplane, Cilium and Knative - amongst other things. ;)
+The change process starts at localhost. Hence, we consider localhost experience (`kind` and maybe `k3s` soon) very important. Given that, some elements may be useful in CI context. Most things however, should play nice on produtive environments as well.
 
 This repo is mostly based on [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example). The docs over there should still be pretty accurate.
 
-Generate encryption keys for ssh/gpg:
+At the moment, we cover deployments of:
+- Terraform resources (via `tf-controller`)
+- Cilium
+- Metallb
+- Knative
+- Contour
+- Kube-Prometheus
+- Loki
+- Flagger
+- Traefik
+- WeaveWorks GitOps
+- External Secrets
+- CSI Secrets
+- AWS Credentials Sync
+- SOPS Secrets
+- Alerting/Notifications via Slack/MS Teams
+- Image Reflector/Image Automation
+
+Beyond that, we aim at exploring:
+- CrossPlane
+- Istio
+
+
+## Bootrapping
+Encryption keys are required for Image Automation and default gpg (sops) based secrets.
+
+To get started, generate encryption keys for ssh/gpg:
 
 ```shell
 ./script/gen-keys.sh
@@ -16,8 +42,6 @@ Add public deployment key to github. You may also want to disable github actions
 gh repo deploy-key add ...
 ```
 
-
-## Bootrapping
 
 There is a `terraform` + `kind` based bootstrap in [`tf`](./tf):
 
@@ -36,6 +60,7 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - knative challenging (Some bits need `kustomize.toolkit.fluxcd.io/substitute: disabled` in our context, other things need tweaks to upstream yaml to play with GitOps "... configured")
 
 ## TODO
+- Introduce `terraform-modules/kind-metallb`
 - Naming?
 - Deduplicate/Dry things
 - ~~Setup "envs" properly / remove literals~~
@@ -53,6 +78,8 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - contour appear to play with knative, kind and flux! (use from bitnami)
 - provide tool to wipe (shipping) encrypted secrets
 - default to auto update everything?
+- Update to recent flux2 version
+- Move to nix
 
 ## Misc/Random Bits
 - ~~[Kind cluster with Cilium and no kube-proxy](https://medium.com/@charled.breteche/kind-cluster-with-cilium-and-no-kube-proxy-c6f4d84b5a9d)~~

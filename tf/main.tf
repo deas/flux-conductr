@@ -1,9 +1,11 @@
 # https://github.com/hashicorp/terraform/issues/28580#issuecomment-831263879
 terraform {
+  required_version = ">= 1.2"
+
   required_providers {
     kind = {
       source  = "tehcyx/kind"
-      version = "0.0.14"
+      version = ">= 0.0.14"
     }
     /*
     github = {
@@ -22,6 +24,11 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.10.0"
     }
+    kustomization = {
+      source  = "kbst/kustomization"
+      version = ">= 0.9.2"
+    }
+
     /* flux = {
       source  = "fluxcd/flux"
       version = ">= 0.0.13"
@@ -63,6 +70,10 @@ provider "kubectl" {
   cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
   # token                  = data.aws_eks_cluster_auth.main.token
   load_config_file = false
+}
+
+provider "kustomization" {
+  kubeconfig_raw = kind_cluster.default.kubeconfig
 }
 
 locals {
@@ -115,12 +126,12 @@ resource "helm_release" "cilium" {
 }
 
 module "flux" {
-  source = "github.com/deas/terraform-modules//flux?ref=ed96cf5bb1a6c08f891688f695865ac31e1f66ea"
-  # version
-  # target_path = var.target_path
-  # branch          = var.flux_branch
-  flux_install = file("${var.filename_flux_path}/gotk-components.yaml")
-  flux_sync    = file("${var.filename_flux_path}/gotk-sync.yaml")
+  # TODO: Replace kubectl with kustomize in the flux module
+  source = "github.com/deas/terraform-modules//flux?ref=main"
+  # source    = "../../terraform-modules/flux"
+  namespace = "flux-system"
+  # bootstrap_manifest = try(file(var.bootstrap_path), null)
+  kustomization_path = var.flux_kustomization_path
   tls_key = {
     private = file(var.id_rsa_fluxbot_ro_path)
     public  = file(var.id_rsa_fluxbot_ro_pub_path)
@@ -136,7 +147,9 @@ module "flux" {
   #  }
   #}
   providers = {
-    kubernetes = kubernetes
+    kubernetes    = kubernetes
+    kubectl       = kubectl
+    kustomization = kustomization
   }
 }
 
