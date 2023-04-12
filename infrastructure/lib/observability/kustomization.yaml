@@ -9,7 +9,6 @@ resources:
 - namespace.yaml
 - release-kube-prometheus.yaml
 - secret-slack-ops-test.yaml
-- alertmanagerconfig-global.yaml
 - release-loki.yaml
 - release-promtail.yaml
 - configmap-dashboards-istio.yaml
