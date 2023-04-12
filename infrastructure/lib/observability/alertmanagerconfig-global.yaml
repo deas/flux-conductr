@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: global
+  namespace: monitoring
+  #labels:
+  #  alertmanagerConfig: prometheus # Same as release
+spec:
+  route:
+    groupBy: ['job']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: 'slack'
+    # provision alertmanager configuration: failed to initialize from global AlertmangerConfig: 'matchers' not permitted on root route
+    # matchers:
+    # # severity =~ "warning|critical"
+    # - name: severity
+    #   value: critical
+  receivers:
+  - name: 'slack'
+    slackConfigs:
+    - apiURL:
+        key: address
+        name: slack-ops-test
+      channel: '#local-ops'
+      title: '{{ .Status | toUpper }}: {{ .CommonLabels.alertname }}'
+      text: '{{ .CommonAnnotations.summary }}'
+      sendResolved: true
+    #webhookConfigs:
+    #- url: 'http://example.com/'

@@ -9,6 +9,16 @@ variable "kind_cluster_name" {
   default     = "flux-conductr"
 }
 
+variable "kind_cluster_image" {
+  type    = string
+  default = null
+}
+
+variable "cilium_version" {
+  type    = string
+  default = "1.13.1"
+}
+
 /*
 variable "github_init" {
   type        = bool
@@ -37,6 +47,20 @@ variable "flux_kustomization_path" {
   default = "../clusters/local/flux-system"
 }
 
+variable "dns_hosts" {
+  type    = map(string)
+  default = null
+}
+
+variable "extra_mounts" {
+  type    = list(map(string))
+  default = []
+}
+
+variable "metallb" {
+  type    = bool
+  default = true
+}
 
 /*
 variable "gcp_secrets_credentials" {

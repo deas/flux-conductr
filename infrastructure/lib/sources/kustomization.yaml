@@ -13,7 +13,15 @@ resources:
   - flagger.yaml
   - gitops-demos.yaml
   - podinfo.yaml
-  - flux-monitoring.yaml
+  # - flux-monitoring.yaml
+  - prometheus-community.yaml
+  - grafana.yaml
+  - istio.yaml
+  - kiali.yaml
+  - metrics-server.yaml
+  - openzipkin.yaml
+  - kyverno.yaml
+  - fsa.yaml
     # - acme-oci.yaml
     # - acme-github.yaml
     # - secret-aws.yaml

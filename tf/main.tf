@@ -94,13 +94,15 @@ resource "kind_cluster" "default" {
     api_version = "kind.x-k8s.io/v1alpha4"
 
     node {
-      role = "control-plane"
-    }
-
-    # Cilium
-    networking {
-      disable_default_cni = true   # do not install kindnet
-      kube_proxy_mode     = "none" # do not run kube-proxy
+      role  = "control-plane"
+      image = var.kind_cluster_image
+      dynamic "extra_mounts" {
+        for_each = var.extra_mounts
+        content {
+          container_path = extra_mounts.value["container_path"]
+          host_path      = extra_mounts.value["host_path"]
+        }
+      }
     }
 
     #node {
@@ -108,6 +110,12 @@ resource "kind_cluster" "default" {
     #  image = "kindest/node:v1.19.1"
     #}
     # Guess this will work as the creation changes to context?
+
+    networking {
+      disable_default_cni = var.cilium_version != null                       # do not install kindnet for cilium
+      kube_proxy_mode     = var.cilium_version != null ? "none" : "iptables" # do not run kube-proxy for cilium
+    }
+
   }
   // TODO: Should be covered by wait_for_ready?
   provisioner "local-exec" {
@@ -115,12 +123,43 @@ resource "kind_cluster" "default" {
   }
 }
 
-resource "helm_release" "cilium" {
-  name = "cilium"
+data "http" "metallb_native" {
+  count = var.metallb ? 1 : 0
+  url   = "https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml"
+}
 
+module "metallb_config" {
+  count  = var.metallb ? 1 : 0
+  source = "github.com/deas/terraform-modules//kind-metallb?ref=main"
+}
+
+module "metallb" {
+  count  = var.metallb ? 1 : 0
+  source = "github.com/deas/terraform-modules//metallb?ref=main"
+  # source           = "../../terraform-modules/metallb"
+  install_manifest = data.http.metallb_native[0].response_body
+  config_manifest  = module.metallb_config[0].manifest
+}
+
+# Be careful with this module. It will patch coredns configmap ;)
+module "coredns" {
+  # version
+  # source          = "../../terraform-modules/coredns"
+  source = "github.com/deas/terraform-modules//coredns?ref=main"
+  hosts  = var.dns_hosts
+  count  = var.dns_hosts != null ? 1 : 0
+  providers = {
+    kubectl = kubectl
+  }
+}
+
+# Bare minimum to get CNI up here (Won't work via flux)
+resource "helm_release" "cilium" {
+  count      = var.cilium_version != null ? 1 : 0
+  name       = "cilium"
   repository = "https://helm.cilium.io"
   chart      = "cilium"
-  version    = "1.12.3"
+  version    = var.cilium_version
   namespace  = "kube-system"
   values     = [file("cilium-values.yaml")]
 }

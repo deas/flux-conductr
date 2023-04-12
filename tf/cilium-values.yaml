@@ -14,8 +14,19 @@ image:
 ipam:
   mode: kubernetes
 hubble:
-  enabled: true
-  relay:
-    enabled: true
+  enabled: false
 operator:
+  # prometheus:
+  #   enabled: true
+  #   # serviceMonitor:
+  #   #   enabled: true
+  #   #   labels:
+  #   #     release: prometheus
   replicas: 1
+
+prometheus:
+  enabled: true
+  # serviceMonitor:
+  #   enabled: true
+  #   labels:
+  #     release: prometheus  

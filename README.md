@@ -11,10 +11,12 @@ At the moment, we cover deployments of:
 - Cilium
 - Metallb
 - Knative
+- Istio/Zipkin/Kiali
 - Contour
 - Kube-Prometheus
-- Loki
+- Loki/Promtail
 - Flagger
+- Flamingo/Flux Subsystem for Argo
 - Traefik
 - WeaveWorks GitOps
 - External Secrets
@@ -26,7 +28,6 @@ At the moment, we cover deployments of:
 
 Beyond that, we aim at exploring:
 - CrossPlane
-- Istio
 
 
 ## Bootrapping
@@ -60,26 +61,32 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - knative challenging (Some bits need `kustomize.toolkit.fluxcd.io/substitute: disabled` in our context, other things need tweaks to upstream yaml to play with GitOps "... configured")
 
 ## TODO
-- Introduce `terraform-modules/kind-metallb`
 - Naming?
 - Deduplicate/Dry things
 - ~~Setup "envs" properly / remove literals~~
-- Flux Dashboard?
+- Flux Dashboard
 - [Grafana/Prometheus](https://fluxcd.io/flux/guides/monitoring/)?
 - Flagger? Rolling, Blue/Green, Canary?
-- Validation ( -> Monitoring)
-- local k3s (Speed?)
+- Improve Github Actions Quality Gates
+- Local k3s (Speed?)
 - Borrow bits from Tanzu?
 - Manage github with `terraform`/crossplane
-- bb scripting?
+- babashka scripting?
 - `tfctl` app/`terraform` plan approval via ChatOps (Slack?)
-- basic sops/lastpass/github key managment?
+- Basic sops/lastpass/github key managment?
 - ~~knative?~~
-- contour appear to play with knative, kind and flux! (use from bitnami)
-- provide tool to wipe (shipping) encrypted secrets
-- default to auto update everything?
-- Update to recent flux2 version
-- Move to nix
+- ~~Replace Contour with Istio~~ ?
+- ~~Contour appears to play with knative, kind and flux! (use from bitnami)~~
+- Provide tool to wipe (shipping) encrypted secrets
+- Default to auto update everything?
+- Migrate `asdf` to `nix`
+- ~~Leverage `metallb.universe.tf/allow-shared-ip: "flux-conductr"` annotation to share/simplify IP address usage~~
+- External (M)DNS
+- Migrate zipkin to helm
+- Introduce kyverno
+- Enable flagger/knative with istio
+- ~~Enable Alerting to Slack/Discord (needs [alertmanager-discord](https://github.com/masgustavos/alertmanager-discord))~~
+- ~~Integrate Cilium Metrics/Monitoring~~
 
 ## Misc/Random Bits
 - ~~[Kind cluster with Cilium and no kube-proxy](https://medium.com/@charled.breteche/kind-cluster-with-cilium-and-no-kube-proxy-c6f4d84b5a9d)~~

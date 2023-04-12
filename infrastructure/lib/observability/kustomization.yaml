@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# namespace: ..
+  # TODO: event-exporter/kubewatch and other current things don't directly play with prometheus
+  # - release-kubernetes-event-exporter.yaml
+  # - podmonitor-kubernetes-event-exporter.yaml
+  # - release-metrics-server.yaml
+resources:
+- namespace.yaml
+- release-kube-prometheus.yaml
+- secret-slack-ops-test.yaml
+- alertmanagerconfig-global.yaml
+- release-loki.yaml
+- release-promtail.yaml
+- configmap-dashboards-istio.yaml
+- configmap-dashboards.yaml
+  # - release-minio.yaml
+patches:
+- path: configmap-dashboards-metadata.yaml

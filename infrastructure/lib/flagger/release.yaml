@@ -11,12 +11,20 @@ spec:
         kind: HelmRepository
         name: flagger
         namespace: flux-system
-      version: "1.22.2"
+      version: "1.29.0"
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
   interval: 1h0m0s
   install:
     remediation:
       retries: 3
   values:
-    meshProvider: traefik
-    prometheus:
-      install: true
+    meshProvider: istio
+    metricsServer: http://prometheus-operated.monitoring.svc.cluster.local:9090
+    podMonitor:
+      enabled: true
+      labels:
+        release: prometheus
+    # prometheus:
+    #  install: true

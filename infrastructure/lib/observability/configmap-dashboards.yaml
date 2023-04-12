@@ -1,0 +1,2018 @@
+apiVersion: v1
+data:
+  istio-mesh-dashboard_rev159.json: |-
+    {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
+      "__requires": [
+        {
+          "type": "grafana",
+          "id": "grafana",
+          "name": "Grafana",
+          "version": "6.4.3"
+        },
+        {
+          "type": "panel",
+          "id": "graph",
+          "name": "Graph",
+          "version": ""
+        },
+        {
+          "type": "datasource",
+          "id": "prometheus",
+          "name": "Prometheus",
+          "version": "5.0.0"
+        },
+        {
+          "type": "panel",
+          "id": "table",
+          "name": "Table",
+          "version": ""
+        }
+      ],
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "description": "Istio Mesh Dashboard version 1.18.0-alpha.0",
+      "editable": false,
+      "gnetId": 7639,
+      "graphTooltip": 0,
+      "id": null,
+      "links": [],
+      "panels": [
+        {
+          "content": "<div>\n  <div style=\"position: absolute; bottom: 0\">\n    <a href=\"https://istio.io\" target=\"_blank\" style=\"font-size: 30px; text-decoration: none; color: inherit\"><img src=\"https://istio.io/latest/img/istio-bluelogo-nobackground-unframed.svg\" style=\"height: 50px\"> Istio</a>\n  </div>\n  <div style=\"position: absolute; bottom: 0; right: 0; font-size: 15px\">\n    Istio is an <a href=\"https://github.com/istio/istio\" target=\"_blank\">open platform</a> that provides a uniform way to <a href=\"https://istio.io/docs/concepts/security/\" target=\"_blank\">secure</a>,\n    <a href=\"https://istio.io/docs/concepts/traffic-management/\" target=\"_blank\">connect</a>, and \n    <a href=\"https://istio.io/docs/concepts/observability/\" target=\"_blank\">monitor</a> microservices.\n    <br>\n    Need help? <a href=\"https://istio.io/get-involved/\" target=\"_blank\">Join the Istio community</a>.\n  </div>\n</div>",
+          "gridPos": {
+            "h": 3,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "height": "50px",
+          "id": 13,
+          "links": [],
+          "mode": "html",
+          "style": {
+            "font-size": "18pt"
+          },
+          "title": "",
+          "transparent": true,
+          "type": "text"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "ops",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 0,
+            "y": 3
+          },
+          "id": 20,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "round(sum(irate(istio_requests_total{reporter=\"source\"}[1m])), 0.001)",
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": "",
+          "title": "Global Request Volume",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "percentunit",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 80,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": false
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 6,
+            "y": 3
+          },
+          "id": 21,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "sum(rate(istio_requests_total{reporter=\"source\", response_code!~\"5.*\"}[1m])) / sum(rate(istio_requests_total{reporter=\"source\"}[1m]))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": "95, 99, 99.5",
+          "title": "Global Success Rate (non-5xx responses)",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "ops",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 12,
+            "y": 3
+          },
+          "id": 22,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "sum(irate(istio_requests_total{reporter=\"source\", response_code=~\"4.*\"}[1m]))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": "",
+          "title": "4xxs",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "ops",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 18,
+            "y": 3
+          },
+          "id": 23,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "sum(irate(istio_requests_total{reporter=\"source\", response_code=~\"5.*\"}[1m]))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": "",
+          "title": "5xxs",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 0,
+            "y": 6
+          },
+          "id": 113,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"VirtualService\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"VirtualService\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Virtual Services",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 6,
+            "y": 6
+          },
+          "id": 114,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"DestinationRule\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"DestinationRule\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Destination Rules",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 12,
+            "y": 6
+          },
+          "id": 115,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"Gateway\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"Gateway\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Gateways",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 18,
+            "y": 6
+          },
+          "id": 116,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"WorkloadEntry\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"WorkloadEntry\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Workload Entries",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 0,
+            "y": 6
+          },
+          "id": 117,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"ServiceEntry\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"ServiceEntry\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Service Entries",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 6,
+            "y": 6
+          },
+          "id": 90,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"PeerAuthentication\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"PeerAuthentication\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "PeerAuthentication Policies",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 12,
+            "y": 6
+          },
+          "id": 91,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"RequestAuthentication\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"RequestAuthentication\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "RequestAuthentication Policies",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 6,
+            "x": 18,
+            "y": 6
+          },
+          "id": 92,
+          "interval": null,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "max(pilot_k8s_cfg_events{type=\"AuthorizationPolicy\", event=\"add\"}) - (max(pilot_k8s_cfg_events{type=\"AuthorizationPolicy\", event=\"delete\"}) or max(up * 0))",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Authorization Policies",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "columns": [],
+          "datasource": "${DS_PROMETHEUS}",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 21,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "hideTimeOverride": false,
+          "id": 73,
+          "links": [],
+          "pageSize": null,
+          "repeat": null,
+          "repeatDirection": "v",
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 5,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Workload",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "Workload dashboard",
+              "linkUrl": "/dashboard/db/istio-workload-dashboard?var-namespace=${__cell_3:raw}&var-workload=${__cell_2:raw}",
+              "pattern": "destination_workload",
+              "preserveFormat": false,
+              "sanitize": false,
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Time",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "Requests",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #A",
+              "thresholds": [],
+              "type": "number",
+              "unit": "ops"
+            },
+            {
+              "alias": "P50 Latency",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #B",
+              "thresholds": [],
+              "type": "number",
+              "unit": "s"
+            },
+            {
+              "alias": "P90 Latency",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #C",
+              "thresholds": [],
+              "type": "number",
+              "unit": "s"
+            },
+            {
+              "alias": "P99 Latency",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #D",
+              "thresholds": [],
+              "type": "number",
+              "unit": "s"
+            },
+            {
+              "alias": "Success Rate",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #E",
+              "thresholds": [
+                ".95",
+                " 1.00"
+              ],
+              "type": "number",
+              "unit": "percentunit"
+            },
+            {
+              "alias": "Workload",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": true,
+              "linkTooltip": "$__cell dashboard",
+              "linkUrl": "/dashboard/db/istio-workload-dashboard?var-workload=${__cell_2:raw}&var-namespace=${__cell_3:raw}",
+              "pattern": "destination_workload_var",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Service",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": true,
+              "linkTooltip": "$__cell dashboard",
+              "linkUrl": "/dashboard/db/istio-service-dashboard?var-service=${__cell_1:raw}",
+              "pattern": "destination_service",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "destination_workload_namespace",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "label_join(sum(rate(istio_requests_total{reporter=\"source\", response_code=\"200\"}[1m])) by (destination_workload, destination_workload_namespace, destination_service), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload}}.{{ destination_workload_namespace }}",
+              "refId": "A"
+            },
+            {
+              "expr": "label_join((histogram_quantile(0.50, sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"source\"}[1m])) by (le, destination_workload, destination_workload_namespace)) / 1000) or histogram_quantile(0.50, sum(rate(istio_request_duration_seconds_bucket{reporter=\"source\"}[1m])) by (le, destination_workload, destination_workload_namespace)), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload}}.{{ destination_workload_namespace }}",
+              "refId": "B"
+            },
+            {
+              "expr": "label_join((histogram_quantile(0.90, sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"source\"}[1m])) by (le, destination_workload, destination_workload_namespace)) / 1000) or histogram_quantile(0.90, sum(rate(istio_request_duration_seconds_bucket{reporter=\"source\"}[1m])) by (le, destination_workload, destination_workload_namespace)), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload }}.{{ destination_workload_namespace }}",
+              "refId": "C"
+            },
+            {
+              "expr": "label_join((histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"source\"}[1m])) by (le, destination_workload, destination_workload_namespace)) / 1000) or histogram_quantile(0.99, sum(rate(istio_request_duration_seconds_bucket{reporter=\"source\"}[1m])) by (le, destination_workload, destination_workload_namespace)), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload }}.{{ destination_workload_namespace }}",
+              "refId": "D"
+            },
+            {
+              "expr": "label_join((sum(rate(istio_requests_total{reporter=\"source\", response_code!~\"5.*\"}[1m])) by (destination_workload, destination_workload_namespace) / sum(rate(istio_requests_total{reporter=\"source\"}[1m])) by (destination_workload, destination_workload_namespace)), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload }}.{{ destination_workload_namespace }}",
+              "refId": "E"
+            }
+          ],
+          "timeFrom": null,
+          "title": "HTTP/GRPC Workloads",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": "${DS_PROMETHEUS}",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 18,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "hideTimeOverride": false,
+          "id": 109,
+          "links": [],
+          "pageSize": null,
+          "repeatDirection": "v",
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 5,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Workload",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "$__cell dashboard",
+              "linkUrl": "/dashboard/db/istio-workload-dashboard?var-namespace=${__cell_3:raw}&var-workload=${__cell_2:raw}",
+              "pattern": "destination_workload",
+              "preserveFormat": false,
+              "sanitize": false,
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "Bytes Sent",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #A",
+              "thresholds": [
+                ""
+              ],
+              "type": "number",
+              "unit": "Bps"
+            },
+            {
+              "alias": "Bytes Received",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value #B",
+              "thresholds": [],
+              "type": "number",
+              "unit": "Bps"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Time",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "Workload",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": true,
+              "linkTooltip": "$__cell dashboard",
+              "linkUrl": "/dashboard/db/istio-workload-dashboard?var-namespace=${__cell_3:raw}&var-workload=${__cell_2:raw}",
+              "pattern": "destination_workload_var",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "destination_workload_namespace",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "Service",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": true,
+              "linkTooltip": "$__cell dashboard",
+              "linkUrl": "/dashboard/db/istio-service-dashboard?var-service=${__cell_1:raw}",
+              "pattern": "destination_service",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "label_join(sum(rate(istio_tcp_received_bytes_total{reporter=\"source\"}[1m])) by (destination_workload, destination_workload_namespace, destination_service), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload }}",
+              "refId": "A"
+            },
+            {
+              "expr": "label_join(sum(rate(istio_tcp_sent_bytes_total{reporter=\"source\"}[1m])) by (destination_workload, destination_workload_namespace, destination_service), \"destination_workload_var\", \".\", \"destination_workload\", \"destination_workload_namespace\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "{{ destination_workload }}",
+              "refId": "B"
+            }
+          ],
+          "timeFrom": null,
+          "title": "TCP Workloads",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 48
+          },
+          "id": 111,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(istio_build) by (component, tag)",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ component }}: {{ tag }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Istio Components by Version",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "refresh": "5s",
+      "schemaVersion": 18,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": "default",
+              "value": "default"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "label": null,
+            "multi": false,
+            "name": "datasource",
+            "options": [],
+            "query": "prometheus",
+            "queryValue": "",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "type": "datasource"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-5m",
+        "to": "now"
+      },
+      "timepicker": {
+        "refresh_intervals": [
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ],
+        "time_options": [
+          "5m",
+          "15m",
+          "1h",
+          "6h",
+          "12h",
+          "24h",
+          "2d",
+          "7d",
+          "30d"
+        ]
+      },
+      "timezone": "browser",
+      "title": "Istio Mesh Dashboard",
+      "uid": "G8wLrJIZk",
+      "version": 5
+    }
+  sample-istio-dashboard.json: "{\n  \"annotations\": {\n    \"list\": [\n      {\n
+    \       \"builtIn\": 1,\n        \"datasource\": \"Prometheus\",\n        \"enable\":
+    true,\n        \"hide\": true,\n        \"iconColor\": \"rgba(0, 211, 255, 1)\",\n
+    \       \"limit\": 100,\n        \"name\": \"Annotations & Alerts\",\n        \"showIn\":
+    0,\n        \"type\": \"dashboard\"\n      }\n    ]\n  },\n  \"editable\": true,\n
+    \ \"gnetId\": null,\n  \"graphTooltip\": 0,\n  \"id\": 1,\n  \"links\": [],\n
+    \ \"panels\": [\n    {\n      \"collapsed\": false,\n      \"datasource\": null,\n
+    \     \"gridPos\": {\n        \"h\": 1,\n        \"w\": 24,\n        \"x\": 0,\n
+    \       \"y\": 0\n      },\n      \"id\": 20,\n      \"panels\": [],\n      \"repeat\":
+    null,\n      \"title\": \"Chaos Metrics\",\n      \"type\": \"row\"\n    },\n
+    \   {\n      \"aliasColors\": {},\n      \"bars\": false,\n      \"dashLength\":
+    10,\n      \"dashes\": false,\n      \"datasource\": null,\n      \"fieldConfig\":
+    {\n        \"defaults\": {\n          \"custom\": {}\n        },\n        \"overrides\":
+    []\n      },\n      \"fill\": 10,\n      \"fillGradient\": 5,\n      \"gridPos\":
+    {\n        \"h\": 9,\n        \"w\": 12,\n        \"x\": 0,\n        \"y\": 1\n
+    \     },\n      \"hiddenSeries\": false,\n      \"id\": 15,\n      \"legend\":
+    {\n        \"avg\": false,\n        \"current\": false,\n        \"max\": false,\n
+    \       \"min\": false,\n        \"show\": true,\n        \"total\": false,\n
+    \       \"values\": false\n      },\n      \"lines\": true,\n      \"linewidth\":
+    1,\n      \"links\": [],\n      \"nullPointMode\": \"null\",\n      \"options\":
+    {\n        \"dataLinks\": []\n      },\n      \"percentage\": false,\n      \"pointradius\":
+    5,\n      \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\":
+    [\n        {\n          \"alias\": \"catalogue-cpu-hog\",\n          \"color\":
+    \"#96D98D\",\n          \"fillGradient\": 5,\n          \"stack\": \"A\",\n          \"steppedLine\":
+    true\n        },\n        {\n          \"alias\": \"sample-memory-hog\",\n          \"color\":
+    \"#E0B400\",\n          \"fillGradient\": 5,\n          \"stack\": \"B\",\n          \"steppedLine\":
+    true\n        }\n      ],\n      \"spaceLength\": 10,\n      \"stack\": false,\n
+    \     \"steppedLine\": true,\n      \"targets\": [\n        {\n          \"expr\":
+    \"heptio_eventrouter_normal_total{reason=\\\"ChaosInject\\\",involved_object_name=\\\"catalogue-cpu-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    - on () (heptio_eventrouter_normal_total{reason=\\\"PostChaosCheck\\\",involved_object_name=\\\"catalogue-cpu-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    OR on() vector(0))\",\n          \"format\": \"time_series\",\n          \"instant\":
+    false,\n          \"interval\": \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"catalogue-cpu-hog\",\n          \"refId\": \"A\",\n          \"step\": 2\n        },\n
+    \       {\n          \"expr\": \"heptio_eventrouter_normal_total{reason=\\\"ChaosInject\\\",involved_object_name=\\\"sample-memory-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    - on () (heptio_eventrouter_normal_total{reason=\\\"PostChaosCheck\\\",involved_object_name=\\\"sample-memory-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    OR on() vector(0))\",\n          \"format\": \"time_series\",\n          \"instant\":
+    false,\n          \"interval\": \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"sample-memory-hog\",\n          \"refId\": \"B\",\n          \"step\": 2\n        }\n
+    \     ],\n      \"thresholds\": [],\n      \"timeFrom\": null,\n      \"timeRegions\":
+    [],\n      \"timeShift\": null,\n      \"title\": \"Chaos Experiments\",\n      \"tooltip\":
+    {\n        \"shared\": true,\n        \"sort\": 0,\n        \"value_type\": \"individual\"\n
+    \     },\n      \"type\": \"graph\",\n      \"xaxis\": {\n        \"buckets\":
+    null,\n        \"mode\": \"time\",\n        \"name\": null,\n        \"show\":
+    true,\n        \"values\": []\n      },\n      \"yaxes\": [\n        {\n          \"format\":
+    \"none\",\n          \"label\": \"CHAOS = TRUE\",\n          \"logBase\": 2,\n
+    \         \"max\": \"1\",\n          \"min\": \"0\",\n          \"show\": true\n
+    \       },\n        {\n          \"format\": \"short\",\n          \"label\":
+    null,\n          \"logBase\": 1,\n          \"max\": null,\n          \"min\":
+    null,\n          \"show\": true\n        }\n      ],\n      \"yaxis\": {\n        \"align\":
+    false,\n        \"alignLevel\": null\n      }\n    },\n    {\n      \"cacheTimeout\":
+    null,\n      \"datasource\": null,\n      \"fieldConfig\": {\n        \"defaults\":
+    {\n          \"custom\": {},\n          \"mappings\": [\n            {\n              \"id\":
+    0,\n              \"op\": \"=\",\n              \"text\": \"N/A\",\n              \"type\":
+    1,\n              \"value\": \"null\"\n            }\n          ],\n          \"nullValueMode\":
+    \"connected\",\n          \"thresholds\": {\n            \"mode\": \"absolute\",\n
+    \           \"steps\": [\n              {\n                \"color\": \"green\",\n
+    \               \"value\": null\n              },\n              {\n                \"color\":
+    \"red\",\n                \"value\": 80\n              }\n            ]\n          },\n
+    \         \"unit\": \"none\"\n        },\n        \"overrides\": []\n      },\n
+    \     \"gridPos\": {\n        \"h\": 9,\n        \"w\": 3,\n        \"x\": 12,\n
+    \       \"y\": 1\n      },\n      \"id\": 16,\n      \"interval\": null,\n      \"links\":
+    [],\n      \"maxDataPoints\": 100,\n      \"options\": {\n        \"orientation\":
+    \"horizontal\",\n        \"reduceOptions\": {\n          \"calcs\": [\"max\"],\n
+    \         \"fields\": \"\",\n          \"values\": false\n        },\n        \"showThresholdLabels\":
+    false,\n        \"showThresholdMarkers\": true\n      },\n      \"pluginVersion\":
+    \"7.0.6\",\n      \"targets\": [\n        {\n          \"expr\": \"sum(litmuschaos_passed_experiments{namespace=\\\"litmus\\\",job=\\\"chaos-exporter\\\"})
+    + sum(litmuschaos_failed_experiments{namespace=\\\"litmus\\\",job=\\\"chaos-exporter\\\"})\",\n
+    \         \"interval\": \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"\",\n          \"refId\": \"A\",\n          \"step\": 20\n        }\n      ],\n
+    \     \"timeFrom\": null,\n      \"timeShift\": null,\n      \"title\": \"Total
+    Experiments Run\",\n      \"type\": \"gauge\"\n    },\n    {\n      \"cacheTimeout\":
+    null,\n      \"datasource\": null,\n      \"fieldConfig\": {\n        \"defaults\":
+    {\n          \"custom\": {},\n          \"mappings\": [\n            {\n              \"id\":
+    0,\n              \"op\": \"=\",\n              \"text\": \"N/A\",\n              \"type\":
+    1,\n              \"value\": \"null\"\n            }\n          ],\n          \"nullValueMode\":
+    \"connected\",\n          \"thresholds\": {\n            \"mode\": \"absolute\",\n
+    \           \"steps\": [\n              {\n                \"color\": \"green\",\n
+    \               \"value\": null\n              },\n              {\n                \"color\":
+    \"red\",\n                \"value\": 80\n              }\n            ]\n          },\n
+    \         \"unit\": \"none\"\n        },\n        \"overrides\": []\n      },\n
+    \     \"gridPos\": {\n        \"h\": 9,\n        \"w\": 3,\n        \"x\": 15,\n
+    \       \"y\": 1\n      },\n      \"id\": 28,\n      \"interval\": null,\n      \"links\":
+    [],\n      \"maxDataPoints\": 100,\n      \"options\": {\n        \"orientation\":
+    \"horizontal\",\n        \"reduceOptions\": {\n          \"calcs\": [\"max\"],\n
+    \         \"fields\": \"\",\n          \"values\": false\n        },\n        \"showThresholdLabels\":
+    false,\n        \"showThresholdMarkers\": true\n      },\n      \"pluginVersion\":
+    \"7.0.6\",\n      \"targets\": [\n        {\n          \"expr\": \"sum(litmuschaos_passed_experiments{namespace=\\\"litmus\\\",job=\\\"chaos-exporter\\\"})\",\n
+    \         \"interval\": \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"\",\n          \"refId\": \"A\",\n          \"step\": 20\n        }\n      ],\n
+    \     \"timeFrom\": null,\n      \"timeShift\": null,\n      \"title\": \"Passed
+    Experiments\",\n      \"type\": \"gauge\"\n    },\n    {\n      \"cacheTimeout\":
+    null,\n      \"datasource\": null,\n      \"fieldConfig\": {\n        \"defaults\":
+    {\n          \"custom\": {},\n          \"mappings\": [\n            {\n              \"id\":
+    0,\n              \"op\": \"=\",\n              \"text\": \"N/A\",\n              \"type\":
+    1,\n              \"value\": \"null\"\n            }\n          ],\n          \"nullValueMode\":
+    \"connected\",\n          \"thresholds\": {\n            \"mode\": \"absolute\",\n
+    \           \"steps\": [\n              {\n                \"color\": \"green\",\n
+    \               \"value\": null\n              },\n              {\n                \"color\":
+    \"red\",\n                \"value\": 80\n              }\n            ]\n          },\n
+    \         \"unit\": \"none\"\n        },\n        \"overrides\": []\n      },\n
+    \     \"gridPos\": {\n        \"h\": 9,\n        \"w\": 3,\n        \"x\": 18,\n
+    \       \"y\": 1\n      },\n      \"id\": 19,\n      \"interval\": null,\n      \"links\":
+    [],\n      \"maxDataPoints\": 100,\n      \"options\": {\n        \"orientation\":
+    \"horizontal\",\n        \"reduceOptions\": {\n          \"calcs\": [\"max\"],\n
+    \         \"fields\": \"\",\n          \"values\": false\n        },\n        \"showThresholdLabels\":
+    false,\n        \"showThresholdMarkers\": true\n      },\n      \"pluginVersion\":
+    \"7.0.6\",\n      \"targets\": [\n        {\n          \"expr\": \"sum(litmuschaos_failed_experiments{namespace=\\\"litmus\\\",job=\\\"chaos-exporter\\\"})\",\n
+    \         \"interval\": \"\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"\",\n          \"refId\": \"A\",\n          \"step\": 20\n        }\n      ],\n
+    \     \"title\": \"Failed Experiments\",\n      \"type\": \"gauge\"\n    },\n
+    \   {\n      \"cacheTimeout\": null,\n      \"datasource\": null,\n      \"fieldConfig\":
+    {\n        \"defaults\": {\n          \"custom\": {},\n          \"mappings\":
+    [\n            {\n              \"id\": 0,\n              \"op\": \"=\",\n              \"text\":
+    \"N/A\",\n              \"type\": 1,\n              \"value\": \"null\"\n            }\n
+    \         ],\n          \"nullValueMode\": \"connected\",\n          \"thresholds\":
+    {\n            \"mode\": \"absolute\",\n            \"steps\": [\n              {\n
+    \               \"color\": \"green\",\n                \"value\": null\n              },\n
+    \             {\n                \"color\": \"red\",\n                \"value\":
+    80\n              }\n            ]\n          },\n          \"unit\": \"none\"\n
+    \       },\n        \"overrides\": []\n      },\n      \"gridPos\": {\n        \"h\":
+    9,\n        \"w\": 3,\n        \"x\": 21,\n        \"y\": 1\n      },\n      \"id\":
+    18,\n      \"interval\": null,\n      \"links\": [],\n      \"maxDataPoints\":
+    100,\n      \"options\": {\n        \"orientation\": \"horizontal\",\n        \"reduceOptions\":
+    {\n          \"calcs\": [\"lastNotNull\"],\n          \"fields\": \"\",\n          \"values\":
+    false\n        },\n        \"showThresholdLabels\": false,\n        \"showThresholdMarkers\":
+    true\n      },\n      \"pluginVersion\": \"7.0.6\",\n      \"targets\": [\n        {\n
+    \         \"expr\": \"sum(litmuschaos_awaited_experiments{namespace=\\\"litmus\\\",job=\\\"chaos-exporter\\\"})\",\n
+    \         \"interval\": \"\",\n          \"intervalFactor\": 3,\n          \"legendFormat\":
+    \"\",\n          \"refId\": \"A\"\n        }\n      ],\n      \"title\": \"Queued
+    Experiments\",\n      \"type\": \"gauge\"\n    },\n    {\n      \"collapsed\":
+    false,\n      \"datasource\": null,\n      \"gridPos\": {\n        \"h\": 1,\n
+    \       \"w\": 24,\n        \"x\": 0,\n        \"y\": 10\n      },\n      \"id\":
+    21,\n      \"panels\": [],\n      \"repeat\": null,\n      \"title\": \"Sample
+    Metrics\",\n      \"type\": \"row\"\n    },\n    {\n      \"aliasColors\": {},\n
+    \     \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\": false,\n
+    \     \"datasource\": null,\n      \"fieldConfig\": {\n        \"defaults\": {\n
+    \         \"custom\": {}\n        },\n        \"overrides\": []\n      },\n      \"fill\":
+    1,\n      \"fillGradient\": 0,\n      \"gridPos\": {\n        \"h\": 7,\n        \"w\":
+    12,\n        \"x\": 0,\n        \"y\": 11\n      },\n      \"hiddenSeries\": false,\n
+    \     \"id\": 5,\n      \"legend\": {\n        \"avg\": false,\n        \"current\":
+    false,\n        \"max\": false,\n        \"min\": false,\n        \"show\": true,\n
+    \       \"total\": false,\n        \"values\": false\n      },\n      \"lines\":
+    true,\n      \"linewidth\": 1,\n      \"links\": [],\n      \"nullPointMode\":
+    \"null\",\n      \"options\": {\n        \"dataLinks\": []\n      },\n      \"percentage\":
+    false,\n      \"pointradius\": 5,\n      \"points\": false,\n      \"renderer\":
+    \"flot\",\n      \"seriesOverrides\": [\n        {\n          \"alias\": \"2xx\",\n
+    \         \"lines\": true\n        },\n        {\n          \"alias\": \"Chaos
+    Period\",\n          \"color\": \"#F2495C\",\n          \"fillGradient\": 7,\n
+    \         \"steppedLine\": true,\n          \"yaxis\": 2\n        }\n      ],\n
+    \     \"spaceLength\": 10,\n      \"stack\": false,\n      \"steppedLine\": false,\n
+    \     \"targets\": [\n        {\n          \"expr\": \"sum(rate(istio_request_duration_milliseconds_count{destination_service_name=\\\"sample\\\",response_code=~\\\"2..\\\"}[1m]))
+    * 100\",\n          \"intervalFactor\": 2,\n          \"legendFormat\": \"2xx\",\n
+    \         \"refId\": \"A\",\n          \"step\": 2\n        },\n        {\n          \"expr\":
+    \"sum(rate(istio_request_duration_milliseconds_count{destination_service_name=\\\"sample\\\",response_code=~\\\"4.+|5.+\\\"}[1m]))
+    * 100\",\n          \"intervalFactor\": 2,\n          \"legendFormat\": \"4xx/5xx\",\n
+    \         \"refId\": \"B\",\n          \"step\": 2\n        },\n        {\n          \"expr\":
+    \"heptio_eventrouter_normal_total{reason=\\\"ChaosInject\\\",involved_object_name=\\\"sample-memory-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    - on () (heptio_eventrouter_normal_total{reason=\\\"PostChaosCheck\\\",involved_object_name=\\\"sample-memory-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    OR on() vector(0))\",\n          \"interval\": \"\",\n          \"legendFormat\":
+    \"Chaos Period\",\n          \"refId\": \"C\"\n        }\n      ],\n      \"thresholds\":
+    [],\n      \"timeFrom\": null,\n      \"timeRegions\": [],\n      \"timeShift\":
+    null,\n      \"title\": \"Sample QPS\",\n      \"tooltip\": {\n        \"shared\":
+    true,\n        \"sort\": 0,\n        \"value_type\": \"individual\"\n      },\n
+    \     \"type\": \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n        \"mode\":
+    \"time\",\n        \"name\": null,\n        \"show\": true,\n        \"values\":
+    []\n      },\n      \"yaxes\": [\n        {\n          \"format\": \"ops\",\n
+    \         \"label\": \"QPS (1 min)\",\n          \"logBase\": 1,\n          \"min\":
+    0,\n          \"show\": true\n        },\n        {\n          \"decimals\": null,\n
+    \         \"format\": \"short\",\n          \"label\": \"CHAOS\",\n          \"logBase\":
+    2,\n          \"max\": \"1\",\n          \"min\": \"0\",\n          \"show\":
+    true\n        }\n      ],\n      \"yaxis\": {\n        \"align\": false,\n        \"alignLevel\":
+    null\n      }\n    },\n    {\n      \"aliasColors\": {},\n      \"bars\": false,\n
+    \     \"dashLength\": 10,\n      \"dashes\": false,\n      \"datasource\": null,\n
+    \     \"fieldConfig\": {\n        \"defaults\": {\n          \"custom\": {}\n
+    \       },\n        \"overrides\": []\n      },\n      \"fill\": 1,\n      \"fillGradient\":
+    0,\n      \"gridPos\": {\n        \"h\": 7,\n        \"w\": 12,\n        \"x\":
+    12,\n        \"y\": 11\n      },\n      \"hiddenSeries\": false,\n      \"id\":
+    6,\n      \"legend\": {\n        \"avg\": false,\n        \"current\": false,\n
+    \       \"max\": false,\n        \"min\": false,\n        \"show\": true,\n        \"total\":
+    false,\n        \"values\": false\n      },\n      \"lines\": true,\n      \"linewidth\":
+    1,\n      \"links\": [],\n      \"nullPointMode\": \"null\",\n      \"options\":
+    {\n        \"dataLinks\": []\n      },\n      \"percentage\": false,\n      \"pointradius\":
+    5,\n      \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\":
+    [\n        {\n          \"alias\": \"99th quantile\",\n          \"lines\": true\n
+    \       },\n        {\n          \"alias\": \"50th quantile\",\n          \"lines\":
+    true\n        },\n        {\n          \"alias\": \"Mean\",\n          \"lines\":
+    true\n        },\n        {\n          \"alias\": \"Chaos Period\",\n          \"color\":
+    \"#E02F44\",\n          \"fillGradient\": 7,\n          \"steppedLine\": true,\n
+    \         \"yaxis\": 2\n        }\n      ],\n      \"spaceLength\": 10,\n      \"stack\":
+    false,\n      \"steppedLine\": false,\n      \"targets\": [\n        {\n          \"expr\":
+    \"histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket{destination_service_name=\\\"sample\\\"}[1m]))
+    by (destination_service_name, le))\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"99th quantile\",\n          \"refId\": \"A\",\n          \"step\": 2\n        },\n
+    \       {\n          \"expr\": \"histogram_quantile(0.5, sum(rate(istio_request_duration_milliseconds_bucket{destination_service_name=\\\"sample\\\"}[1m]))
+    by (destination_service_name, le))\",\n          \"intervalFactor\": 2,\n          \"legendFormat\":
+    \"50th quantile\",\n          \"refId\": \"B\",\n          \"step\": 2\n        },\n
+    \       {\n          \"expr\": \"sum(rate(request_duration_seconds_sum{destination_service_name=\\\"sample\\\"}[1m]))
+    / sum(rate(istio_request_duration_milliseconds_count{destination_service_name=\\\"sample\\\"}[1m]))\",\n
+    \         \"intervalFactor\": 2,\n          \"legendFormat\": \"Mean\",\n          \"refId\":
+    \"C\",\n          \"step\": 2\n        },\n        {\n          \"expr\": \"heptio_eventrouter_normal_total{reason=\\\"ChaosInject\\\",involved_object_name=\\\"sample-memory-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    - on () (heptio_eventrouter_normal_total{reason=\\\"PostChaosCheck\\\",involved_object_name=\\\"sample-memory-hog\\\",
+    involved_object_namespace=\\\"litmus\\\", involved_object_kind=\\\"ChaosEngine\\\"}
+    OR on() vector(0))\",\n          \"interval\": \"\",\n          \"legendFormat\":
+    \"Chaos Period\",\n          \"refId\": \"D\"\n        }\n      ],\n      \"thresholds\":
+    [],\n      \"timeFrom\": null,\n      \"timeRegions\": [],\n      \"timeShift\":
+    null,\n      \"title\": \"Sample latency\",\n      \"tooltip\": {\n        \"shared\":
+    true,\n        \"sort\": 0,\n        \"value_type\": \"individual\"\n      },\n
+    \     \"type\": \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n        \"mode\":
+    \"time\",\n        \"name\": null,\n        \"show\": true,\n        \"values\":
+    []\n      },\n      \"yaxes\": [\n        {\n          \"format\": \"s\",\n          \"logBase\":
+    1,\n          \"min\": 0,\n          \"show\": true\n        },\n        {\n          \"format\":
+    \"short\",\n          \"label\": \"CHAOS\",\n          \"logBase\": 2,\n          \"max\":
+    \"1\",\n          \"min\": \"0\",\n          \"show\": true\n        }\n      ],\n
+    \     \"yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n
+    \     }\n    }    \n  ],\n  \"refresh\": \"5s\",\n  \"schemaVersion\": 25,\n  \"style\":
+    \"dark\",\n  \"tags\": [],\n  \"templating\": {\n    \"list\": []\n  },\n  \"time\":
+    {\n    \"from\": \"now-1h\",\n    \"to\": \"now\"\n  },\n  \"timepicker\": {\n
+    \   \"refresh_intervals\": [\n      \"10s\",\n      \"30s\",\n      \"1m\",\n
+    \     \"5m\",\n      \"15m\",\n      \"30m\",\n      \"1h\",\n      \"2h\",\n
+    \     \"1d\"\n    ],\n    \"time_options\": [\"5m\", \"15m\", \"1h\", \"6h\",
+    \"12h\", \"24h\", \"2d\", \"7d\", \"30d\"]\n  },\n  \"timezone\": \"browser\",\n
+    \ \"title\": \"Sample Istio Performance\",\n  \"version\": 6\n}\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: dashboards-flux-conductr
+  namespace: monitoring
