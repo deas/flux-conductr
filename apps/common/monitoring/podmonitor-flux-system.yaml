@@ -19,5 +19,6 @@ spec:
           - notification-controller
           - image-automation-controller
           - image-reflector-controller
+          # - tf-controller # does not have the app label
   podMetricsEndpoints:
     - targetPort: http-prom

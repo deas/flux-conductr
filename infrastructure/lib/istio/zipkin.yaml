@@ -38,12 +38,13 @@ metadata:
   labels:
     app: zipkin
 spec:
-  # type: ClusterIP
-  type: LoadBalancer
+  type: NodePort # ClusterIP
+  # type: LoadBalancer
   ports:
     - name: http-query
-      # port: 80
-      port: 9411
+      port: 80
+      # port: 9411
+      nodePort: 30280
       protocol: TCP
       targetPort: 9411
   selector:

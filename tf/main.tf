@@ -5,7 +5,7 @@ terraform {
   required_providers {
     kind = {
       source  = "tehcyx/kind"
-      version = ">= 0.0.14"
+      version = ">= 0.0.17"
     }
     /*
     github = {
@@ -107,6 +107,24 @@ resource "kind_cluster" "default" {
           host_path      = extra_mounts.value["host_path"]
         }
       }
+      # Does NOT work with metallb loadbalancers consuming IPs from Docker IPAM. Only with kind container IP
+      # The default range is indeed 30000-32767 but it can be changed by setting the --service-node-port-range 
+      dynamic "extra_port_mappings" {
+        for_each = var.extra_port_mappings
+        content {
+          container_port = extra_port_mappings.value["container_port"]
+          host_port      = extra_port_mappings.value["host_port"]
+        }
+        # optional: set the bind address on the host
+        # 0.0.0.0 is the current default
+        # listen_address = "127.0.0.1"
+        # optional: set the protocol to one of TCP, UDP, SCTP.
+        # TCP is the default
+        # protocol =  "TCP"
+      }
+      #dynamic "" {
+      #  
+      #}
     }
 
     #node {

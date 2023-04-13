@@ -4,5 +4,18 @@ namespace: monitoring
 resources:
 - podmonitor-flux-system.yaml
 - prometheus-operator-istio.yaml
+# TODO: Still potential timing issues during initial deployment
+# AlertmanagerConfig/monitoring/global dry-run failed, error: no matches for kind "AlertmanagerConfig" in version "monitoring.coreos.com/v1alpha1"
 - alertmanagerconfig-global.yaml
-
+# Borrowed at https://github.com/fluxcd/flux2/tree/main/manifests/monitoring/monitoring-config
+configMapGenerator:
+  - name: flux-grafana-dashboards
+    files:
+      - dashboards/control-plane.json
+      - dashboards/cluster.json
+      - dashboards/logs.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+        app.kubernetes.io/part-of: flux
+        app.kubernetes.io/component: monitoring

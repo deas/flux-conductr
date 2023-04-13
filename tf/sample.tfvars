@@ -11,6 +11,29 @@
 #   "container_path" = "/etc/ssl/certs/ca-certificates.crt"
 #   "host_path"      = "/etc/ssl/certs/ca-certificates.crt"
 # }]
+# In case you want to expose with kind
+# extra_port_mappings = [
+#   {
+#     container_port = 30080
+#     host_port      = 3000 # Grafana
+#   },
+#   {
+#     container_port = 30180
+#     host_port      = 3100 # Loki
+#   },
+#   {
+#     container_port = 30280
+#     host_port      = 9411 # Zipkin
+#   },
+#   {
+#     container_port = 30380
+#     host_port      = 10080 # Istio-Ingress
+#   },
+#   {
+#     container_port = 30480
+#     host_port      = 10180 # Weave-GitOps
+#   }
+# ]
 # flux_kustomization_path         = "../clusters/local/flux-system"
 #cluster = "local"
 

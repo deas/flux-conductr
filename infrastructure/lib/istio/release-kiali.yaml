@@ -20,10 +20,11 @@ spec:
   install:
     remediation:
       retries: 3
-  values:
-    deployment:
-      service_type: LoadBalancer
-      service_annotations:
-        metallb.universe.tf/allow-shared-ip: "flux-conductr"
-        # metallb.universe.tf/loadBalancerIPs: "172.18.255.200"
+  values: {}
+    # Chart does not support NodePort type - may not make sense to expose it anyways
+    # deployment:
+    #   service_type: LoadBalancer
+    #   service_annotations:
+    #     metallb.universe.tf/allow-shared-ip: "flux-conductr"
+    #     # metallb.universe.tf/loadBalancerIPs: "172.18.255.200"
 

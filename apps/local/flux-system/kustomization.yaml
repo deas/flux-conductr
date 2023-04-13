@@ -5,10 +5,9 @@ resources:
 #- ../secret-aws-env.yaml
 - terraform-hello.yaml
 - secret-terraform-hello-env.yaml
-- external-secret-datadog-env.yaml
+# - external-secret-datadog-env.yaml # Needs valid awssm secret
 - provider-slack-ops-test.yaml
 - secret-slack-ops-test.yaml
 - automation-acme.yaml
 - alert-deployment.yaml
-# - alert-terraform.yaml
 

@@ -4,4 +4,4 @@ resources:
   - flux-system
   - knative
   - cilium
-  # - monitoring
+  - monitoring

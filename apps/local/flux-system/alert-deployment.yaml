@@ -7,8 +7,9 @@ spec:
     name: slack-ops
   eventSeverity: info
   # summary: 
+  #https://github.com/weaveworks/tf-controller/issues/557
   #exclusionList:
-  #  - ""
+  #  - "failed to verify artifact: computed checksum"     
   eventSources:
     # - image.toolkit.fluxcd.io/v1beta1 ImagePolicy
     # - image.toolkit.fluxcd.io/v1beta1 ImageRepository

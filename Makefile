@@ -24,6 +24,19 @@ create-dashboard-configmaps: ## Create dashboard ConfigMaps
 	$(KUBECTL) -n monitoring create configmap dashboards-flux-conductr --from-file=./infrastructure/lib/observability/dashboards -o yaml --dry-run=client > ./infrastructure/lib/observability/configmap-dashboards.yaml
 
 
+.PHONY: all-loadbalancer-services
+all-loadbalancer-services: ## Show all loadbalancer services
+	$(KUBECTL) get svc -A -o jsonpath='{range .items[?(@.spec.type=="LoadBalancer")]}{.status.loadBalancer.ingress[].ip}:{.spec.ports[].port}{"\n"}{end}'
+
+# TODO: WIP - something along those lines should be faster than recreating the docker container - while we mess around
+# iptables -t nat -A  DOCKER -p tcp --dport 3000 -j DNAT --to-destination 172.18.255.200:3000 -m comment --comment 'flux-conductr LB to 3000'
+# iptables -t nat -L DOCKER --line-number
+# iptables -t nat -D DOCKER ${line_number}
+
+.PHONY: show-kiali-token
+show-kiali-token: ## Show kiali token
+	@$(KUBECTL) -n istio-system get $$($(KUBECTL) -n istio-system get secret -o name | grep secret/kiali) --template={{.data.token}} | base64 --decode; echo
+
 target:
 	mkdir target
 

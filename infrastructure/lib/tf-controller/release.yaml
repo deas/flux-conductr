@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: tf-controller
-      version: 0.6.4
+      version: 0.11.0
   install:
     crds: Create
   interval: 1h0m0s
@@ -20,4 +20,8 @@ spec:
   targetNamespace: flux-system
   upgrade:
     crds: CreateReplace
+  values:
+    image:
+      # TODO: Go back to upstream
+      tag: upgrade-to-flux-2-rc-1-d3949b9e # hotfix 
 

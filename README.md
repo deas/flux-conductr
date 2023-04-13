@@ -79,14 +79,17 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - ~~Contour appears to play with knative, kind and flux! (use from bitnami)~~
 - Provide tool to wipe (shipping) encrypted secrets
 - Default to auto update everything?
-- Migrate `asdf` to `nix`
 - ~~Leverage `metallb.universe.tf/allow-shared-ip: "flux-conductr"` annotation to share/simplify IP address usage~~
 - External (M)DNS
 - Migrate zipkin to helm
 - Introduce kyverno
-- Enable flagger/knative with istio
+- Enable flagger/knative with Istio
+- Introduce `kubeconfig` module (s. argocd-conductr) to make kind cluster optional in terraform
 - ~~Enable Alerting to Slack/Discord (needs [alertmanager-discord](https://github.com/masgustavos/alertmanager-discord))~~
 - ~~Integrate Cilium Metrics/Monitoring~~
+- [tf-controller : failed to verify artifact: computed checksum](https://github.com/weaveworks/tf-controller/issues/557)
+- Consider migrating `make` to [`just`](https://github.com/casey/just)
+- Speed: `ClusterSecretStore/aws dry-run failed, reason: InternalError, error: Internal error occurred: failed calling webhook "validate.clustersecretstore.external-secrets.io": failed to call webhook: Post "https://external-secrets-webhook.external-secrets.svc:443/validate-external-secrets-io-v1beta1-clustersecretstore?timeout=5s": dial tcp 10.96.107.155:443: connect: operation not permitted` takes a bit long to come up
 
 ## Misc/Random Bits
 - ~~[Kind cluster with Cilium and no kube-proxy](https://medium.com/@charled.breteche/kind-cluster-with-cilium-and-no-kube-proxy-c6f4d84b5a9d)~~

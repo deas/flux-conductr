@@ -6,4 +6,4 @@ resources:
   - acme
   - flux-system
   - monitoring
-  - clustersecretstore-aws.yaml
+  # - clustersecretstore-aws.yaml

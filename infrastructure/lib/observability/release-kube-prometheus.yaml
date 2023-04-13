@@ -220,10 +220,13 @@ spec:
       #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
       #   version: 1
       service:
-        type: LoadBalancer
+        # type: LoadBalancer
+        # port: 3000 # default is 80
+        # annotations:
+        #   metallb.universe.tf/allow-shared-ip: "flux-conductr"
+        #   # metallb.universe.tf/loadBalancerIPs: "172.18.255.200"
+        type: NodePort
+        nodePort: 30080
         port: 3000 # default is 80
-        annotations:
-          metallb.universe.tf/allow-shared-ip: "flux-conductr"
-          # metallb.universe.tf/loadBalancerIPs: "172.18.255.200"
 
 

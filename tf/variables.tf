@@ -11,7 +11,7 @@ variable "kind_cluster_name" {
 
 variable "kind_cluster_image" {
   type    = string
-  default = null
+  default = "kindest/node:v1.25.8"
 }
 
 variable "cilium_version" {
@@ -53,6 +53,11 @@ variable "dns_hosts" {
 }
 
 variable "extra_mounts" {
+  type    = list(map(string))
+  default = []
+}
+
+variable "extra_port_mappings" {
   type    = list(map(string))
   default = []
 }
