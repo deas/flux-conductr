@@ -2,7 +2,9 @@
 
 The primary goal of this project is to exercise and experiment with [flux](https://fluxcd.io/) based [GitOps](https://gitops.tech) deployment covering the cycle - up to production via promotion, if you want to. Experimentation and production do not have to conflict.
 
-The change process starts at localhost. Hence, we consider localhost experience (`kind` and maybe `k3s` soon) very important. Given that, some elements may be useful in CI context. Most things however, should play nice on produtive environments as well.
+The change process starts at localhost. Hence, we consider localhost experience (`kind` and maybe `k3s` soon) very important. That aim is reflected by the way we expose services locally. There is another strong emphasis on fast feedback. We want things to be available quickly. That includes issues surfacing. Hence, we deeply care about observability. 
+
+Many elements should be useful in CI context. Most things however, should play nice on produtive environments as well.
 
 This repo is mostly based on [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example). The docs over there should still be pretty accurate.
 
@@ -66,10 +68,10 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - ~~Setup "envs" properly / remove literals~~
 - Flux Dashboard
 - [Grafana/Prometheus](https://fluxcd.io/flux/guides/monitoring/)?
-- Flagger? Rolling, Blue/Green, Canary?
+- Demo: Flagger/Rolling/Blue/Green/Canary
 - Improve Github Actions Quality Gates
 - Local k3s (Speed?)
-- Borrow bits from Tanzu?
+- ~~Borrow bits from Tanzu? (Does not appear to make sense in flux focused context)~~
 - Manage github with `terraform`/crossplane
 - babashka scripting?
 - `tfctl` app/`terraform` plan approval via ChatOps (Slack?)
@@ -82,14 +84,15 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - ~~Leverage `metallb.universe.tf/allow-shared-ip: "flux-conductr"` annotation to share/simplify IP address usage~~
 - External (M)DNS
 - Migrate zipkin to helm
-- Introduce kyverno
-- Enable flagger/knative with Istio
-- Introduce `kubeconfig` module (s. argocd-conductr) to make kind cluster optional in terraform
+- Introduce Kyverno
+- Enable Flagger/Knative with Istio
 - ~~Enable Alerting to Slack/Discord (needs [alertmanager-discord](https://github.com/masgustavos/alertmanager-discord))~~
 - ~~Integrate Cilium Metrics/Monitoring~~
 - [tf-controller : failed to verify artifact: computed checksum](https://github.com/weaveworks/tf-controller/issues/557)
 - Consider migrating `make` to [`just`](https://github.com/casey/just)
-- Speed: `ClusterSecretStore/aws dry-run failed, reason: InternalError, error: Internal error occurred: failed calling webhook "validate.clustersecretstore.external-secrets.io": failed to call webhook: Post "https://external-secrets-webhook.external-secrets.svc:443/validate-external-secrets-io-v1beta1-clustersecretstore?timeout=5s": dial tcp 10.96.107.155:443: connect: operation not permitted` takes a bit long to come up
+- Introduce [`resmoio/kubernetes-event-exporter`](https://github.com/resmoio/kubernetes-event-exporter)
+- The `infra` / `config` `Kustomization` naming borrowed from `flux2-kustomize-helm-example` is not ideal. It's mostly about dependencies. Hence, the `wave` terminology from `argcocd` might be a bit better. Also, it is about concurrency.
+- ~~[Hubble UI displays Trying to reconnect streams and Datastream has failed on UI backend: EOF #21582](https://github.com/cilium/cilium/issues/21582)~~
 
 ## Misc/Random Bits
 - ~~[Kind cluster with Cilium and no kube-proxy](https://medium.com/@charled.breteche/kind-cluster-with-cilium-and-no-kube-proxy-c6f4d84b5a9d)~~

@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cilium-observability
+  name: cilium #-observability
   namespace: kube-system
 spec:
-  releaseName: cilium-observability
+  releaseName: cilium # -observability
   chart:
     spec:
       chart: cilium
@@ -18,32 +18,32 @@ spec:
     remediation:
       retries: 3
   values:
-    rbac:
-      create: false
-    serviceAccounts:
-      cilium:
-        create: false
-      etcd:
-        create: false
-      operator:
-        create: false
-      preflight:
-        create: false
-      relay:
-        create: true
-      ui:
-        create: true
-      clustermeshApiserver:
-        create: false
-      clustermeshcertgen:
-        create: false
-      hubblecertgen:
-        create: false
-    
-    agent: false
-    
-    cni:
-      install: false
+    # rbac:
+    #   create: false
+    # serviceAccounts:
+    #   cilium:
+    #     create: false
+    #   etcd:
+    #     create: false
+    #   operator:
+    #     create: false
+    #   preflight:
+    #     create: false
+    #   relay:
+    #     create: true
+    #   ui:
+    #     create: true
+    #   clustermeshApiserver:
+    #     create: false
+    #   clustermeshcertgen:
+    #     create: false
+    #   hubblecertgen:
+    #     create: false
+    # 
+    # agent: false
+    # 
+    # cni:
+    #   install: false
     
     #endpointStatus:
     #  enabled: false
@@ -68,8 +68,11 @@ spec:
             labels:
               release: prometheus
       ui:
-        enabled: true   
-    
+        enabled: true
+        service:
+          type: NodePort
+          nodePort: 30580
+
     # # -- Configure the eBPF-based ip-masq-agent
     # ipMasqAgent:
     #   enabled: false
@@ -91,4 +94,5 @@ spec:
     
     operator:
       # -- Enable the cilium-operator component (required).
-      enabled: false
+      enabled: true
+      replicas: 1

@@ -29,7 +29,7 @@ spec:
     # - notification.toolkit.fluxcd.io/v1beta1 Provider
     # - kind: GitRepository # source.toolkit.fluxcd.io/v1beta2
     #  name: '*'
-    - kind: Kustomization # kustomize.toolkit.fluxcd.io/v1beta2
+    - kind: Kustomization # kustomize.toolkit.fluxcd.io/v1
       name: '*'
     - apiVersion: infra.contrib.fluxcd.io/v1alpha1
       kind: Terraform

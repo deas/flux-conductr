@@ -32,6 +32,10 @@
 #   {
 #     container_port = 30480
 #     host_port      = 10180 # Weave-GitOps
+#   },
+#   {
+#     container_port = 30580
+#     host_port      = 10280 # Hubble-UI
 #   }
 # ]
 # flux_kustomization_path         = "../clusters/local/flux-system"

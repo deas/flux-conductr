@@ -19,14 +19,9 @@ gh-add-deploy-key: ## Add Deployment key to github
 image-summary: ## Show deployed images
 	$(KUBECTL) get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}" | tr -s '[[:space:]]' '\n' | grep -v quay.io/openshift/okd-content | sort | uniq -c | sort -n | tac
 
-.PHONY: create-dashboard-configmaps
-create-dashboard-configmaps: ## Create dashboard ConfigMaps
-	$(KUBECTL) -n monitoring create configmap dashboards-flux-conductr --from-file=./infrastructure/lib/observability/dashboards -o yaml --dry-run=client > ./infrastructure/lib/observability/configmap-dashboards.yaml
-
-
-.PHONY: all-loadbalancer-services
-all-loadbalancer-services: ## Show all loadbalancer services
-	$(KUBECTL) get svc -A -o jsonpath='{range .items[?(@.spec.type=="LoadBalancer")]}{.status.loadBalancer.ingress[].ip}:{.spec.ports[].port}{"\n"}{end}'
+# .PHONY: all-loadbalancer-services
+# all-loadbalancer-services: ## Show all loadbalancer services
+# 	$(KUBECTL) get svc -A -o jsonpath='{range .items[?(@.spec.type=="LoadBalancer")]}{.status.loadBalancer.ingress[].ip}:{.spec.ports[].port}{"\n"}{end}'
 
 # TODO: WIP - something along those lines should be faster than recreating the docker container - while we mess around
 # iptables -t nat -A  DOCKER -p tcp --dport 3000 -j DNAT --to-destination 172.18.255.200:3000 -m comment --comment 'flux-conductr LB to 3000'

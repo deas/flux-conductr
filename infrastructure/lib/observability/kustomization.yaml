@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: monitoring # mandatory for config map generator
 # namespace: ..
   # TODO: event-exporter/kubewatch and other current things don't directly play with prometheus
   # - release-kubernetes-event-exporter.yaml
@@ -12,7 +13,16 @@ resources:
 - release-loki.yaml
 - release-promtail.yaml
 - configmap-dashboards-istio.yaml
-- configmap-dashboards.yaml
-  # - release-minio.yaml
-patches:
-- path: configmap-dashboards-metadata.yaml
+configMapGenerator:
+  - name: flux-conductur-dashboards
+    files:
+      - dashboards/sample-istio-dashboard.json
+    options:
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      labels:
+        grafana_dashboard: "1"
+        # app.kubernetes.io/part-of: flux
+        # app.kubernetes.io/component: monitoring
+#patches:
+#- path: configmap-dashboards-metadata.yaml

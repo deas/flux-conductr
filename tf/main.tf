@@ -44,42 +44,6 @@ terraform {
   }
 }
 
-
-provider "helm" {
-  kubernetes {
-    # config_path = kind_cluster.default.kubeconfig
-    host                   = kind_cluster.default.endpoint
-    client_certificate     = kind_cluster.default.client_certificate
-    client_key             = kind_cluster.default.client_key
-    cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
-  }
-}
-
-provider "kind" {
-}
-
-provider "kubernetes" {
-  # config_path = kind_cluster.default.kubeconfig
-  # config_context = "kind-flux"
-  host                   = kind_cluster.default.endpoint
-  client_certificate     = kind_cluster.default.client_certificate
-  client_key             = kind_cluster.default.client_key
-  cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
-}
-
-provider "kubectl" {
-  host                   = kind_cluster.default.endpoint
-  client_certificate     = kind_cluster.default.client_certificate
-  client_key             = kind_cluster.default.client_key
-  cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
-  # token                  = data.aws_eks_cluster_auth.main.token
-  load_config_file = false
-}
-
-provider "kustomization" {
-  kubeconfig_raw = kind_cluster.default.kubeconfig
-}
-
 locals {
   additional_keys = zipmap(
     keys(var.additional_keys),
@@ -88,10 +52,52 @@ locals {
         keys(secret),
       [for path in values(secret) : file(path)])
   ])
+  # TODO: Whoa! The ultimate mess. Can we do better?
+  cilium_spec         = try(yamldecode(file(var.cilium_helmrelease_path))["spec"], null)
+  cilium_version      = try(local.cilium_spec["chart"]["spec"]["version"], null)
+  cilium_release_name = try(local.cilium_spec["releaseName"], null)
+  cilium_values = try(yamlencode(merge(
+    local.cilium_spec["values"],
+    {
+      "hubble" = {
+        "metrics" = { "serviceMonitor" = { "enabled" = false } },
+        "relay"   = { "prometheus" = { "serviceMonitor" = { "enabled" = false } } }
+      }
+    }
+  )), null)
+  # We want kind to fully play with kube-prometheus
+  kubeadmin_patches = compact([<<EOF
+kind: ClusterConfiguration
+# configure controller-manager bind address
+controllerManager:
+  extraArgs:
+    bind-address: 0.0.0.0 #Disable localhost binding
+#    secure-port: "0"      #Disable the https 
+#    port: "10257"         #Enable http on port 10257
+# configure etcd metrics listen address
+etcd:
+  local:
+    extraArgs:
+      listen-metrics-urls: http://0.0.0.0:2381
+# configure scheduler bind address
+scheduler:
+  extraArgs:
+    bind-address: 0.0.0.0  #Disable localhost binding
+#    secure-port: "0"       #Disable the https
+#    port: "10259"          #Enable http on port 10259
+EOF
+    ,
+    <<EOF
+kind: KubeProxyConfiguration
+# configure proxy metrics bind address
+metricsBindAddress: 0.0.0.0
+EOF
+  ])
 }
 
 resource "kind_cluster" "default" {
   name           = var.kind_cluster_name
+  count          = var.kind_cluster_name == null ? 0 : 1
   wait_for_ready = false # true # false likely needed for cilium bootstrap
   kind_config {
     kind        = "Cluster"
@@ -122,9 +128,8 @@ resource "kind_cluster" "default" {
         # TCP is the default
         # protocol =  "TCP"
       }
-      #dynamic "" {
-      #  
-      #}
+      # TODO: Not quite working yet
+      kubeadm_config_patches = local.kubeadmin_patches
     }
 
     #node {
@@ -134,8 +139,8 @@ resource "kind_cluster" "default" {
     # Guess this will work as the creation changes to context?
 
     networking {
-      disable_default_cni = var.cilium_version != null                       # do not install kindnet for cilium
-      kube_proxy_mode     = var.cilium_version != null ? "none" : "iptables" # do not run kube-proxy for cilium
+      disable_default_cni = var.cilium_helmrelease_path != null                       # do not install kindnet for cilium
+      kube_proxy_mode     = var.cilium_helmrelease_path != null ? "none" : "iptables" # do not run kube-proxy for cilium
     }
 
   }
@@ -177,13 +182,15 @@ module "coredns" {
 
 # Bare minimum to get CNI up here (Won't work via flux)
 resource "helm_release" "cilium" {
-  count      = var.cilium_version != null ? 1 : 0
-  name       = "cilium"
+  count      = var.cilium_helmrelease_path != null ? 1 : 0 # var.cilium_version != null ? 1 : 0
+  name       = local.cilium_release_name
   repository = "https://helm.cilium.io"
   chart      = "cilium"
-  version    = var.cilium_version
+  version    = local.cilium_version # var.cilium_version
   namespace  = "kube-system"
-  values     = [file("cilium-values.yaml")]
+  values     = [local.cilium_values]
+  # file("../infrastructure/lib/config/cilium/values-cilium.yaml")]
+  # values     = [file("cilium-values.yaml")]
 }
 
 module "flux" {

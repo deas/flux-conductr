@@ -14,12 +14,17 @@ variable "kind_cluster_image" {
   default = "kindest/node:v1.25.8"
 }
 
+variable "cilium_helmrelease_path" {
+  type    = string
+  default = "../infrastructure/lib/config/cilium/release-cilium.yaml"
+}
+
+/*
 variable "cilium_version" {
   type    = string
   default = "1.13.1"
 }
 
-/*
 variable "github_init" {
   type        = bool
   default     = false
@@ -58,13 +63,38 @@ variable "extra_mounts" {
 }
 
 variable "extra_port_mappings" {
-  type    = list(map(string))
-  default = []
+  type = list(map(string))
+  default = [
+    {
+      container_port = 30080
+      host_port      = 3000 # Grafana
+    },
+    {
+      container_port = 30180
+      host_port      = 3100 # Loki
+    },
+    {
+      container_port = 30280
+      host_port      = 9411 # Zipkin
+    },
+    {
+      container_port = 30380
+      host_port      = 10080 # Istio-Ingress
+    },
+    {
+      container_port = 30480
+      host_port      = 10180 # Weave-GitOps
+    },
+    {
+      container_port = 30580
+      host_port      = 10280 # Hubble-UI
+    }
+  ]
 }
 
 variable "metallb" {
   type    = bool
-  default = true
+  default = false
 }
 
 /*
