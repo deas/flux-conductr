@@ -11,12 +11,17 @@ variable "kind_cluster_name" {
 
 variable "kind_cluster_image" {
   type    = string
-  default = "kindest/node:v1.25.8"
+  default = "kindest/node:v1.27.3"
 }
 
 variable "cilium_helmrelease_path" {
   type    = string
   default = "../infrastructure/lib/config/cilium/release-cilium.yaml"
+}
+
+variable "containerd_config_patches" {
+  type    = list(string)
+  default = []
 }
 
 /*

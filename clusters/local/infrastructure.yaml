@@ -15,7 +15,7 @@ spec:
   # path: ./infrastructure/local
   path: ./infrastructure/local/controllers
   prune: true
-  wait: true
+  wait: true # Either wait OR do healthChecks
   postBuild:
     substitute:
       gitops_branch: main
@@ -24,6 +24,11 @@ spec:
       # aws_region: eu-central-1
   #    aws_account_id: ...
   #    cluster_name: flux-conductr
+  # healthChecks:
+  #   - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+  #     kind: HelmRelease
+  #     name: kube-prometheus-stack
+  #     namespace: monitoring
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

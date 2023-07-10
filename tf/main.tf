@@ -100,9 +100,9 @@ resource "kind_cluster" "default" {
   count          = var.kind_cluster_name == null ? 0 : 1
   wait_for_ready = false # true # false likely needed for cilium bootstrap
   kind_config {
-    kind        = "Cluster"
-    api_version = "kind.x-k8s.io/v1alpha4"
-
+    kind                      = "Cluster"
+    api_version               = "kind.x-k8s.io/v1alpha4"
+    containerd_config_patches = var.containerd_config_patches
     node {
       role  = "control-plane"
       image = var.kind_cluster_image
@@ -128,7 +128,6 @@ resource "kind_cluster" "default" {
         # TCP is the default
         # protocol =  "TCP"
       }
-      # TODO: Not quite working yet
       kubeadm_config_patches = local.kubeadmin_patches
     }
 

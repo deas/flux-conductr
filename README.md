@@ -29,7 +29,7 @@ At the moment, we cover deployments of:
 - Image Reflector/Image Automation
 
 Beyond that, we aim at exploring:
-- CrossPlane
+- CrossPlane (Cloud Provider AWS/Azure/GCP appear to make most sense, Terraform least)
 
 
 ## Bootrapping
@@ -62,15 +62,23 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 ## Known Issues
 - knative challenging (Some bits need `kustomize.toolkit.fluxcd.io/substitute: disabled` in our context, other things need tweaks to upstream yaml to play with GitOps "... configured")
 
+### Speed / Registries
+We want lifecycle of things (Create/Destroy) to be as fast as possible. Pulling images can slow things down significantly. Contrary docker a host based solution (such as `k3s`), challenges are harder with `kind`. Make sure to understand your the defails of your painpoints before implementing your solution.
+
+- [Local Registry](https://kind.sigs.k8s.io/docs/user/local-registry/)
+- [Pull-through Docker registry on Kind clusters](https://maelvls.dev/docker-proxy-registry-kind/) (`registry:2` supports only one registry per instnance)
+- `kind load` may address some use cases
+- Remove everything in `kind` installed by flux (so we can rebuild from cached images). (s. `make flux-destroy`)
+
 ## TODO
 - Naming?
+- [json error during kustomizationResourceDiff](https://github.com/kbst/terraform-provider-kustomization/issues/219) / Fix `make flux-destroy`
 - Deduplicate/Dry things
 - ~~Setup "envs" properly / remove literals~~
 - Flux Dashboard
 - [Grafana/Prometheus](https://fluxcd.io/flux/guides/monitoring/)?
 - Demo: Flagger/Rolling/Blue/Green/Canary
 - Improve Github Actions Quality Gates
-- Local k3s (Speed?)
 - ~~Borrow bits from Tanzu? (Does not appear to make sense in flux focused context)~~
 - Manage github with `terraform`/crossplane
 - babashka scripting?
@@ -83,7 +91,7 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - Default to auto update everything?
 - ~~Leverage `metallb.universe.tf/allow-shared-ip: "flux-conductr"` annotation to share/simplify IP address usage~~
 - External (M)DNS
-- Migrate zipkin to helm
+- Migrate zipkin to helm / Replace with tempo
 - Introduce Kyverno
 - Enable Flagger/Knative with Istio
 - ~~Enable Alerting to Slack/Discord (needs [alertmanager-discord](https://github.com/masgustavos/alertmanager-discord))~~
@@ -93,6 +101,7 @@ Alternatively, you can bootstrap or even upgrade an existing cluster (be sure to
 - Introduce [`resmoio/kubernetes-event-exporter`](https://github.com/resmoio/kubernetes-event-exporter)
 - The `infra` / `config` `Kustomization` naming borrowed from `flux2-kustomize-helm-example` is not ideal. It's mostly about dependencies. Hence, the `wave` terminology from `argcocd` might be a bit better. Also, it is about concurrency.
 - ~~[Hubble UI displays Trying to reconnect streams and Datastream has failed on UI backend: EOF #21582](https://github.com/cilium/cilium/issues/21582)~~
+- Provide easy (make based) access to docker port mappings to host services / secrets + auth
 
 ## Misc/Random Bits
 - ~~[Kind cluster with Cilium and no kube-proxy](https://medium.com/@charled.breteche/kind-cluster-with-cilium-and-no-kube-proxy-c6f4d84b5a9d)~~

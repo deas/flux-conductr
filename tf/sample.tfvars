@@ -38,6 +38,22 @@
 #     host_port      = 10280 # Hubble-UI
 #   }
 # ]
+#
+# https://maelvls.dev/docker-proxy-registry-kind/
+# containerd_config_patches = [
+#   <<-EOF
+#           [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+#             endpoint = ["http://docker-proxy:5000"]
+#           [plugins."io.containerd.grpc.v1.cri".registry.mirrors."quay.io"]
+#             endpoint = ["http://quay-proxy:5000"]
+#           [plugins."io.containerd.grpc.v1.cri".registry.mirrors."registry.k8s.io"]
+#             endpoint = ["http://k8s-proxy:5000"]
+#           [plugins."io.containerd.grpc.v1.cri".registry.mirrors."ghcr.io"]
+#             endpoint = ["http://ghcr-proxy:5000"]
+#           [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:5000"]
+#             endpoint = ["http://registry:5000"]
+#           EOF
+# ]
 # flux_kustomization_path         = "../clusters/local/flux-system"
 #cluster = "local"
 

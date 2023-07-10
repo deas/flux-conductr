@@ -21,7 +21,11 @@ SHELL := /usr/bin/env bash
 DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 1.3
 DOCKER_IMAGE_DEVELOPER_TOOLS := cft/developer-tools
 REGISTRY_URL := gcr.io/cloud-foundation-cicd
+CLUSTER_NAME = flux-conductr-control-plane
+DOCKER_RESTART = no
 
+TF_LOG = OFF # OFF, TRACE, DEBUG, INFO, WARN or ERROR
+# TF_LOG_CORE/TF_LOG_PROVIDER=
 DEFAULT_GOAL := help
 
 .PHONY: help
@@ -73,11 +77,34 @@ generate_docs: docker_generate_docs
 
 .PHONY: apply
 apply: ## Terraform apply
-	terraform apply -auto-approve
+	TF_LOG=$(TF_LOG) terraform apply -auto-approve
 
 .PHONY: quick-destroy
 quick-destroy: ## Quick destruction
-	docker stop flux-conductr-control-plane
-	docker rm flux-conductr-control-plane
+	docker stop $(CLUSTER_NAME)
+	docker rm $(CLUSTER_NAME)
 	rm -rf 	terraform.tfstate*
 
+.PHONY: flux-destroy
+flux-destroy: ## Only destroy flux module (TODO: broken)
+	TF_LOG=$(TF_LOG) terraform apply -destroy -target=module.flux -auto-approve
+
+.PHONY: docker-update-restart
+docker-update-restart: ## Update Docker Restart Policy
+	docker update --restart=$(DOCKER_RESTART) $(CLUSTER_NAME)
+
+.PHONY: run-pull-registry-proxy
+run-registry-proxy: ## Run pull through registry proxy/-ies
+	docker run -d --name docker-proxy --restart=always --net=kind \
+    	-e REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io registry:2
+	docker run -d --name quay-proxy --restart=always --net=kind \
+    	-e REGISTRY_PROXY_REMOTEURL=https://quay.io registry:2
+	docker run -d --name k8s-proxy --restart=always --net=kind \
+    	-e REGISTRY_PROXY_REMOTEURL=https://registry.k8s.io registry:2
+	docker run -d --name ghcr-proxy --restart=always --net=kind \
+    	-e REGISTRY_PROXY_REMOTEURL=https://ghcr.io registry:2
+
+.PHONY: run-push-registry
+run-registry: ## Run docker registry
+	docker run -d --name registry --restart=always --net=kind \
+    	-p 5000:5000 registry:2

@@ -22,6 +22,7 @@ resources:
   - openzipkin.yaml
   - kyverno.yaml
   - fsa.yaml
+  - deas.yaml
     # - acme-oci.yaml
     # - acme-github.yaml
     # - secret-aws.yaml

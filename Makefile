@@ -28,6 +28,10 @@ image-summary: ## Show deployed images
 # iptables -t nat -L DOCKER --line-number
 # iptables -t nat -D DOCKER ${line_number}
 
+# TODO: Show docker mappings to host services
+# docker inspect flux-conductr-control-plane | jq '.[0].NetworkSettings.Ports'
+# kubectl get svc -A -o json | jq '.items[].spec.ports[] | select(.nodePort != null) | {service: .name, nodePort: .nodePort}'
+
 .PHONY: show-kiali-token
 show-kiali-token: ## Show kiali token
 	@$(KUBECTL) -n istio-system get $$($(KUBECTL) -n istio-system get secret -o name | grep secret/kiali) --template={{.data.token}} | base64 --decode; echo
