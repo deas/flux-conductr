@@ -72,6 +72,7 @@ We want lifecycle of things (Create/Destroy) to be as fast as possible. Pulling 
 
 ## TODO
 - Naming?
+- `update-flux` should work on `wip` branch
 - [json error during kustomizationResourceDiff](https://github.com/kbst/terraform-provider-kustomization/issues/219) / Fix `make flux-destroy`
 - Deduplicate/Dry things
 - ~~Setup "envs" properly / remove literals~~
