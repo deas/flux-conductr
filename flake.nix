@@ -15,26 +15,43 @@
         "aarch64-darwin"
       ];
       forAllSystems = f:
-        builtins.listToAttrs (map (name: {
-          inherit name;
-          value = f name;
-        }) systems);
-    in {
+        builtins.listToAttrs (map
+          (name: {
+            inherit name;
+            value = f name;
+          })
+          systems);
+    in
+    {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
       devShells = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
-        in {
+        in
+        {
           default = devenv.lib.mkShell {
             inherit inputs pkgs;
             modules = [{
               # https://devenv.sh/reference/options/
               packages = [
+                # https://discourse.nixos.org/t/overlay-buildgomodule-overrideattrs-version-overrides/19973
+                # https://nixos.org/manual/nixpkgs/stable/#chap-overrides
+                # TODO: https://discourse.nixos.org/t/use-a-specific-version-of-terraform-in-a-nix-shell/27880
                 pkgs.terraform
+                #
                 # (pkgs.terraform.overrideAttrs (oldAttrs: {
                 #   version = "1.5.0"; # replace with your desired version
                 #   src = pkgs.fetchurl {
                 #     url = "https://releases.hashicorp.com/terraform/${oldAttrs.version}/terraform_${oldAttrs.version}_linux_amd64.zip";
                 #     sha256 = "f25d764edfc89d0d7e42fb99be433558ae45d7a3";
+                #   };
+                # }))
+                # (pkgs.fluxcd.overrideAttrs (oldAttrs: rec {
+                #   name = "fluxcd";
+                #   src = pkgs.fetchFromGitHub {
+                #     owner = "fluxcd";
+                #     repo = "flux2";
+                #     rev = "v2.0.1";
+                #     sha256 = "1bzz5wy13gh8j47mxxp6ij6yh20xmxd9n5lidaln3mf1bil19dmc";
                 #   };
                 # }))
                 pkgs.fluxcd
