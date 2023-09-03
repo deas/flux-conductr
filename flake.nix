@@ -70,7 +70,7 @@
                 #       # vendorSha256 = previous.lib.fakeHash;
                 #     });
                 #   }))
-                # pkgs.fluxcd
+                pkgs.fluxcd
                 # (pkgs.fluxcd.overrideAttrs (oldAttrs: {
                 # #     version = "2.0.0-rc.5";
                 # #     sha256 = "1akxmnbldsm7h4wf40jxsn56njdd5srkr6a3gsi223anl9c43gpx";
