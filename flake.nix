@@ -33,9 +33,6 @@
             modules = [{
               # https://devenv.sh/reference/options/
               packages = [
-                # https://discourse.nixos.org/t/overlay-buildgomodule-overrideattrs-version-overrides/19973
-                # https://nixos.org/manual/nixpkgs/stable/#chap-overrides
-                # TODO: https://discourse.nixos.org/t/use-a-specific-version-of-terraform-in-a-nix-shell/27880
                 pkgs.terraform
                 #
                 # (pkgs.terraform.overrideAttrs (oldAttrs: {
@@ -45,6 +42,10 @@
                 #     sha256 = "f25d764edfc89d0d7e42fb99be433558ae45d7a3";
                 #   };
                 # }))
+                #
+                # https://discourse.nixos.org/t/overlay-buildgomodule-overrideattrs-version-overrides/19973
+                # https://nixos.org/manual/nixpkgs/stable/#chap-overrides
+                # TODO: https://discourse.nixos.org/t/use-a-specific-version-of-terraform-in-a-nix-shell/27880
                 # (pkgs.fluxcd.overrideAttrs (oldAttrs: rec {
                 #   name = "fluxcd";
                 #   src = pkgs.fetchFromGitHub {
@@ -54,7 +55,22 @@
                 #     sha256 = "1bzz5wy13gh8j47mxxp6ij6yh20xmxd9n5lidaln3mf1bil19dmc";
                 #   };
                 # }))
-                pkgs.fluxcd
+                # (pkgs.fluxcd.override
+                #   (previous: {
+                #     buildGoModule = args: previous.buildGoModule (args // {
+                #       version = "v2.1.0";
+                #       src = previous.fetchFromGitHub {
+                #         owner = "fluxcd";
+                #         repo = "flux2";
+                #         rev = "v2.1.0";
+                #         sha256 = "sha256-tlpqPWSlr0nBVAGlzHzFkj2vhnm5/np3zBfJ+ChX6SE=";
+                #         # sha256 = previous.lib.fakeHash;
+                #       };
+                #       vendorSha256 = "sha256-RVHDiJS1MhskVorS/SNZlXWP/oc8OXjUjApeanBkIWQ=";
+                #       # vendorSha256 = previous.lib.fakeHash;
+                #     });
+                #   }))
+                # pkgs.fluxcd
                 # (pkgs.fluxcd.overrideAttrs (oldAttrs: {
                 # #     version = "2.0.0-rc.5";
                 # #     sha256 = "1akxmnbldsm7h4wf40jxsn56njdd5srkr6a3gsi223anl9c43gpx";
