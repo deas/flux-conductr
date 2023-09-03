@@ -48,13 +48,16 @@
                 # TODO: https://discourse.nixos.org/t/use-a-specific-version-of-terraform-in-a-nix-shell/27880
                 # https://nixos.org/manual/nixpkgs/stable/#sec-language-go
                 # (pkgs.fluxcd.overrideAttrs (oldAttrs: rec {
-                #   name = "fluxcd";
+                #   version = "2.1.0";
                 #   src = pkgs.fetchFromGitHub {
                 #     owner = "fluxcd";
                 #     repo = "flux2";
-                #     rev = "v2.0.1";
-                #     sha256 = "1bzz5wy13gh8j47mxxp6ij6yh20xmxd9n5lidaln3mf1bil19dmc";
+                #     rev = "v2.1.0";
+                #     sha256 = "sha256-tlpqPWSlr0nBVAGlzHzFkj2vhnm5/np3zBfJ+ChX6SE=";
+                #     # sha256 = pkgs.lib.fakeHash;
                 #   };
+                #   # vendorSha256 = "sha256-RVHDiJS1MhskVorS/SNZlXWP/oc8OXjUjApeanBkIWQ=";
+                #   vendorSha256 = pkgs.lib.fakeHash;
                 # }))
                 # (pkgs.fluxcd.override
                 #   (previous: {
